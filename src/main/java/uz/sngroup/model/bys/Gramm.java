@@ -15,7 +15,7 @@ public class Gramm {
     private Long id;
 
     @Column(unique = true)
-    private Integer weight;
+    private String weight;
 
     private String description = " ";
 

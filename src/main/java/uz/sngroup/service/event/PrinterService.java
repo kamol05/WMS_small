@@ -33,7 +33,7 @@ public class PrinterService {
 
     private String getWord(Event event){
         String quality = event.getProduct().getName();
-        String gramm = String.valueOf(event.getProduct().getGramm().getWeight());
+        String gramm = event.getProduct().getGramm().getWeight();
         String color = event.getProduct().getColor().getName();
         String pieces = String.valueOf(event.getPieces());
         String weight = String.valueOf(event.getWeight());

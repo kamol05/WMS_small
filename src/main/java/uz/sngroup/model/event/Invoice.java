@@ -19,7 +19,6 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +46,7 @@ public class Invoice {
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_customer"))
     private Customer customer;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "id")
     List<SaleEvent> events = new ArrayList<>();
 

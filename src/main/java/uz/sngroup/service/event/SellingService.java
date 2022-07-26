@@ -3,6 +3,7 @@ package uz.sngroup.service.event;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import uz.sngroup.model.event.Event;
 import uz.sngroup.model.event.EventType;
 import uz.sngroup.model.event.Invoice;
@@ -12,6 +13,8 @@ import uz.sngroup.repository.event.InvoiceRepository;
 import uz.sngroup.service.event.EventService;
 import uz.sngroup.service.event.SaleEventService;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 

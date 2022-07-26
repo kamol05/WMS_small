@@ -83,12 +83,10 @@ public class InvoiceService {
         return print;
     }
 
-
-
-
-    public List<Invoice> getAll() {
-        return invoiceRepository.findAll();
+    public List<SaleEvent> getAllByInvoiceId(Long id){
+        return saleEventRepository.selectGroupByImvoiceID(id);
     }
+
 
     public String save(Invoice invoice) {
         try{
@@ -98,6 +96,10 @@ public class InvoiceService {
             log.error(Arrays.toString(e.getStackTrace()));
             return "Xato!!!";
         }
+    }
+
+    public List<Invoice> getAll() {
+        return invoiceRepository.findAllByOrderByIdDesc();
     }
 
     public void delete(Long id){

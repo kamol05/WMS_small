@@ -4,6 +4,7 @@ import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import uz.sngroup.model.Barcode;
 import uz.sngroup.model.bys.Color;
@@ -13,11 +14,13 @@ import uz.sngroup.model.bys.Quality;
 import uz.sngroup.model.event.Counter;
 import uz.sngroup.model.event.Event;
 import uz.sngroup.model.event.Invoice;
+import uz.sngroup.model.sys.Role;
 import uz.sngroup.model.sys.User;
 import uz.sngroup.repository.bys.*;
 import uz.sngroup.repository.event.EventRepository;
 import uz.sngroup.repository.event.CounterRepository;
 import uz.sngroup.repository.event.InvoiceRepository;
+import uz.sngroup.repository.sys.UserRepository;
 import uz.sngroup.service.event.BarcodeService;
 import uz.sngroup.service.event.SellingService;
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ import java.util.Random;
 public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        addUsers();
 //        fillObjects();
     }
 
@@ -57,7 +61,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             Gramm gramm = new Gramm();
             Color color = new Color();
             quality.setName("quality " + df.getRandomText(8,12) + i);
-            gramm.setWeight(df.getNumberBetween(90,180) + i);
+            gramm.setWeight(df.getRandomText(1,2) + i);
             color.setName("color " + i);
             colorRepository.save(color);
             grammRepository.save(gramm);
@@ -94,6 +98,30 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             sellingService.sell(invoiceList.get(r.nextInt(invoiceList.size())), eventList.get(r.nextInt(eventList.size())).getSerial());
         }
     }
+
+    public void addUsers() {
+        User admin = new User();
+        admin.setLogin("admin");
+        admin.setPassword(bcryptEncoder.encode("32711155"));
+        admin.setRole(Role.ADMIN);
+
+        User user1 = new User();
+        user1.setLogin("sotuv");
+        user1.setPassword(bcryptEncoder.encode("232567"));
+        user1.setRole(Role.USER);
+
+        User user = new User();
+        user.setLogin("barkod");
+        user.setPassword(bcryptEncoder.encode("123456"));
+        user.setRole(Role.BARKOD);
+
+        userRepository.save(admin);
+        userRepository.save(user);
+        userRepository.save(user1);
+
+
+    }
+    @Autowired private PasswordEncoder bcryptEncoder;
     @Autowired private ColorRepository colorRepository;
     @Autowired private GrammRepository grammRepository;
     @Autowired private QualityRepository qualityRepository;
@@ -103,6 +131,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
     @Autowired private CustomerRepository customerRepository;
     @Autowired private InvoiceRepository invoiceRepository;
     @Autowired private SellingService sellingService;
+    @Autowired UserRepository userRepository;
     private List<Quality> qualityList = new ArrayList<>();
     private List<Invoice> invoiceList = new ArrayList<>();
     private List<Gramm> grammList = new ArrayList<>();

@@ -74,9 +74,6 @@ public class StockService {
     }
 
 
-
-
-
     @Autowired private ProductRepository productRepository;
     @Autowired private CounterRepository counterRepository;
     @Autowired private PrinterService printerService;

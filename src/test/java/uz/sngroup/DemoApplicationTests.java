@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import uz.sngroup.model.event.Event;
 import uz.sngroup.model.event.EventType;
+import uz.sngroup.model.event.SaleEvent;
 import uz.sngroup.repository.event.EventRepository;
+import uz.sngroup.repository.event.SaleEventRepository;
+
 import static org.assertj.core.api.Assertions.*;
 import java.util.*;
 
@@ -13,6 +16,14 @@ import java.util.*;
 class DemoApplicationTests {
     @Autowired
     EventRepository eventRepository;
+    @Autowired
+    SaleEventRepository saleEventRepository;
+
+    @Test
+    void testquery2(){
+        List<SaleEvent> eventList = saleEventRepository.selectGroupByImvoiceID(11L);
+        System.out.println(eventList.toString());
+    }
 
     @Test
     void testquery(){
