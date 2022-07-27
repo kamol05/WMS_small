@@ -10,6 +10,7 @@ import uz.sngroup.model.event.Invoice;
 import uz.sngroup.model.event.SaleEvent;
 import uz.sngroup.repository.event.EventRepository;
 import uz.sngroup.repository.event.SaleEventRepository;
+import uz.sngroup.service.Util;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public class SaleEventService {
 
     public SaleEvent createNew(Event event, Invoice invoice){
         SaleEvent saleEvent = new SaleEvent();
+        saleEvent.setUser(event.getUser());
         saleEvent.setSerial(event.getSerial());
         saleEvent.setEan(event.getEan());
         saleEvent.setWidth(event.getWidth());

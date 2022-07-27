@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import uz.sngroup.model.sys.Role;
 import uz.sngroup.model.sys.User;
 import uz.sngroup.repository.sys.UserRepository;
-
 import java.util.List;
 import java.util.Optional;
 

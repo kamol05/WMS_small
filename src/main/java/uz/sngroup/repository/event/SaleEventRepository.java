@@ -11,6 +11,8 @@ import java.util.Optional;
 
 public interface SaleEventRepository extends JpaRepository<SaleEvent, Long> {
 
+    Optional<SaleEvent> findBySerial(Integer serial);
+
     Optional<SaleEvent> getByInvoiceAndSerial(Invoice invoice, Integer serial);
 
     List<SaleEvent> getByInvoice_Id(Long invoiceId);

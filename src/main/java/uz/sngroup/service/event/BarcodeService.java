@@ -30,7 +30,7 @@ public class BarcodeService {
     private String printBarcode(Barcode b) {
         Product product = fillProduct(b);
         Event event = eventService.createInEvent(product, b);
-//        printerService.print(event);
+        printerService.print(event);
         return "barcode bosildi  " + event.getSerial() + "  !!!!";
     }
 

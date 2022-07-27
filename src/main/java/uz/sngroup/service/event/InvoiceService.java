@@ -15,6 +15,7 @@ import uz.sngroup.model.event.SaleEvent;
 import uz.sngroup.repository.bys.CustomerRepository;
 import uz.sngroup.repository.event.InvoiceRepository;
 import uz.sngroup.repository.event.SaleEventRepository;
+import uz.sngroup.service.Util;
 
 import java.io.File;
 import java.io.InputStream;
@@ -25,6 +26,7 @@ import java.util.*;
 public class InvoiceService {
     @Autowired InvoiceRepository invoiceRepository;
     @Autowired SaleEventRepository saleEventRepository;
+    @Autowired Util util;
 
     public ResponseEntity<byte[]> getReport(Long id, int i) throws JRException {
         String reportName = "report" + i + ".jrxml";
@@ -90,6 +92,7 @@ public class InvoiceService {
 
     public String save(Invoice invoice) {
         try{
+            invoice.setUser(util.getLoginFromAuthentication());
             invoiceRepository.save(invoice);
             return "Malumot Kiritildi!!!";
         }catch (Exception e){

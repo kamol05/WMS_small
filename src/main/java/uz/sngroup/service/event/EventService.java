@@ -7,18 +7,24 @@ import uz.sngroup.model.bys.Product;
 import uz.sngroup.model.event.Event;
 import uz.sngroup.model.event.EventType;
 import uz.sngroup.model.event.Counter;
+import uz.sngroup.model.event.SaleEvent;
 import uz.sngroup.model.sys.User;
 import uz.sngroup.repository.event.EventRepository;
 import uz.sngroup.repository.event.CounterRepository;
+import uz.sngroup.repository.event.SaleEventRepository;
 import uz.sngroup.repository.sys.UserRepository;
+import uz.sngroup.service.Util;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventService {
     @Autowired private EventRepository eventRepository;
     @Autowired private CounterRepository counterRepository;
     @Autowired private UserRepository userRepository;
+    @Autowired private SaleEventRepository saleEventRepository;
+    @Autowired private Util util;
 
     public Event createSaleEvent(Event e){
         Event event = new Event();
@@ -38,10 +44,10 @@ public class EventService {
 
     public Event createInEvent(Product product, Barcode b) {
         Event event = new Event();
+        event.setUser(util.getLoginFromAuthentication());
         event.setEventType(EventType.IN);
         event.setProduct(product);
         event.setEan(product.getEan());
-        event.setUser(generateUser());
         event.setSerial(generateSerialNumber());
         event.setWidth(b.getWidth());
         event.setHeight(b.getHeight());
@@ -62,18 +68,15 @@ public class EventService {
         return m2/100;
     }
 
-    private User generateUser(){
-//        User user = new User();
-//        user.setName("Test");
-//        userRepository.save(user);
-        return null;
-    }
-
     private Integer generateSerialNumber() {
         Counter counter = counterRepository.getById(1L);
         counter.setSerial(counter.getSerial() + 1);
         counterRepository.save(counter);
         return counter.getSerial();
+    }
+
+    public List<Event> getAllBySerialNumber(Integer serial){
+        return eventRepository.getBySerial(serial);
     }
 
     public List<Event> getAll() {
@@ -90,5 +93,15 @@ public class EventService {
 
     public Event getById(Long id){
         return eventRepository.getById(id);
+    }
+
+    public String deleteBySerial(Integer serial) {
+        List<Event> events = getAllBySerialNumber(serial);
+        Optional<SaleEvent> optional = saleEventRepository.findBySerial(serial);
+        if (optional.isPresent()){
+            return "Bu Barkod Sotilgan!!";
+        }
+        events.forEach(o -> delete(o.getId()));
+        return "BARKOD O'CHIRILDI";
     }
 }

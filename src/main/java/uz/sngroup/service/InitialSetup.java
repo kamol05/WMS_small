@@ -31,16 +31,37 @@ import java.util.Random;
 public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        addUsers();
+//        addUsers();
+//        addCounter();
 //        fillObjects();
     }
-
-    public void fillObjects(){
+    public void addCounter(){
         Counter counter = new Counter();
         counter.setSerial(100000);
         counter.setEan(47000000);
         counterRepository.save(counter);
+    }
+    public void addUsers() {
+        User admin = new User();
+        admin.setLogin("admin");
+        admin.setPassword(bcryptEncoder.encode("32711155"));
+        admin.setRole(Role.ADMIN);
 
+        User user1 = new User();
+        user1.setLogin("sotuv");
+        user1.setPassword(bcryptEncoder.encode("232567"));
+        user1.setRole(Role.USER);
+
+        User user = new User();
+        user.setLogin("barkod");
+        user.setPassword(bcryptEncoder.encode("123456"));
+        user.setRole(Role.BARKOD);
+
+        userRepository.save(admin);
+        userRepository.save(user);
+        userRepository.save(user1);
+    }
+    public void fillObjects(){
         DataFactory df = new DataFactory();
         for (int i = 0; i < 10; i++) {
             Invoice invoice = new Invoice();
@@ -70,15 +91,12 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
         fillBarcode();
     }
     public void fillBarcode(){
-
-
         Random r = new Random();
         DataFactory df = new DataFactory();
         qualityList = qualityRepository.findAll();
         grammList = grammRepository.findAll();
         colorList = colorRepository.findAll();
         invoiceList = invoiceRepository.findAll();
-
         List<Barcode> barcodeList = new ArrayList<>();
         for (int i = 0; i < 10_00; i++) {
             Barcode barcode = new Barcode();
@@ -97,29 +115,6 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
         for (int i = 0; i < 5_00; i++) {
             sellingService.sell(invoiceList.get(r.nextInt(invoiceList.size())), eventList.get(r.nextInt(eventList.size())).getSerial());
         }
-    }
-
-    public void addUsers() {
-        User admin = new User();
-        admin.setLogin("admin");
-        admin.setPassword(bcryptEncoder.encode("32711155"));
-        admin.setRole(Role.ADMIN);
-
-        User user1 = new User();
-        user1.setLogin("sotuv");
-        user1.setPassword(bcryptEncoder.encode("232567"));
-        user1.setRole(Role.USER);
-
-        User user = new User();
-        user.setLogin("barkod");
-        user.setPassword(bcryptEncoder.encode("123456"));
-        user.setRole(Role.BARKOD);
-
-        userRepository.save(admin);
-        userRepository.save(user);
-        userRepository.save(user1);
-
-
     }
     @Autowired private PasswordEncoder bcryptEncoder;
     @Autowired private ColorRepository colorRepository;
