@@ -3,6 +3,7 @@ package uz.sngroup.service.event;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import uz.sngroup.model.Barcode;
 import uz.sngroup.model.bys.*;
 import uz.sngroup.model.event.Event;
@@ -20,18 +21,38 @@ public class BarcodeService {
 
     public String init(Barcode b){
         try {
-            return printBarcode(b);
+            return printMultipleOrSingle(b);
         }catch (Exception e){
             e.printStackTrace();
-            return "Xatolik !!!";
+            return "Ichki Xatolik !!!";
         }
     }
 
-    private String printBarcode(Barcode b) {
+    private String printMultipleOrSingle(Barcode b) throws InterruptedException {
+        StringBuilder sb = new StringBuilder();
         Product product = fillProduct(b);
-        Event event = eventService.createInEvent(product, b);
-        printerService.print(event);
-        return "barcode bosildi  " + event.getSerial() + "  !!!!";
+        if (b.getQuantity() > 30){
+            return "30 tadan Ko'p  barkod bosish mumkin emas";
+        }
+        if (b.getQuantity() > 0){
+            for (int i = b.getQuantity(); i > 0 ; i--) {
+                sb.append(printSingle(product, b));
+                sb.append(" ");
+                Thread.sleep(1000);
+            }
+            sb.append(" bosildi !!!!");
+            return sb.toString();
+        }
+        sb.append(printSingle(product, b));
+        sb.append(" bosildi !!!!");
+        return sb.toString();
+    }
+
+    @Transactional
+    public String printSingle(Product product, Barcode b){
+        Event event = eventService.createInEvent(product, b);       // here making event
+        printerService.print(event);                                // here sending command to label printer!
+        return String.valueOf(event.getSerial());
     }
 
     private Product fillProduct(Barcode b) {
