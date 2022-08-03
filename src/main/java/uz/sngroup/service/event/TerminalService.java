@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class SellingService {
+public class TerminalService {
     @Autowired EventRepository eventRepository;
     @Autowired InvoiceRepository invoiceRepository;
     @Autowired SaleEventService saleEventService;
@@ -61,7 +61,4 @@ public class SellingService {
         return message;
     }
 
-    public boolean isCorrect(){
-        return false;
-    }
 }

@@ -8,7 +8,6 @@ import uz.sngroup.model.event.EventType;
 import uz.sngroup.model.event.SaleEvent;
 import uz.sngroup.repository.event.EventRepository;
 import uz.sngroup.repository.event.SaleEventRepository;
-
 import static org.assertj.core.api.Assertions.*;
 import java.util.*;
 
@@ -18,6 +17,12 @@ class DemoApplicationTests {
     EventRepository eventRepository;
     @Autowired
     SaleEventRepository saleEventRepository;
+
+    @Test
+    void getallbyproductid(){
+        List<Event> list = eventRepository.getAllByProductIDSpecial(1L);
+        System.out.println(list.toString());
+    }
 
     @Test
     void testquery2(){

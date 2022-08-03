@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+
+  <title>Bosh Sahifa</title>
+  <th:block th:insert="parts/webjars :: webjars"></th:block>
+  <th:block th:insert="parts/static :: static"></th:block>
+
+
+</head>
+
+<body>
+
+<th:block th:insert="parts/header :: header"></th:block>
+
+<main>
+  <img th:src="@{sound/wall.jpg}" style="width: 100%; height: 50%" />
+</main>
+
+</body>
+
+</html>

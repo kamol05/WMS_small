@@ -22,7 +22,7 @@ import uz.sngroup.repository.event.CounterRepository;
 import uz.sngroup.repository.event.InvoiceRepository;
 import uz.sngroup.repository.sys.UserRepository;
 import uz.sngroup.service.event.BarcodeService;
-import uz.sngroup.service.event.SellingService;
+import uz.sngroup.service.event.TerminalService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -113,7 +113,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
         }
         eventList = eventRepository.findAll();
         for (int i = 0; i < 5_00; i++) {
-            sellingService.sell(invoiceList.get(r.nextInt(invoiceList.size())), eventList.get(r.nextInt(eventList.size())).getSerial());
+            terminalService.sell(invoiceList.get(r.nextInt(invoiceList.size())), eventList.get(r.nextInt(eventList.size())).getSerial());
         }
     }
     @Autowired private PasswordEncoder bcryptEncoder;
@@ -125,7 +125,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
     @Autowired private BarcodeService barcodeService;
     @Autowired private CustomerRepository customerRepository;
     @Autowired private InvoiceRepository invoiceRepository;
-    @Autowired private SellingService sellingService;
+    @Autowired private TerminalService terminalService;
     @Autowired UserRepository userRepository;
     private List<Quality> qualityList = new ArrayList<>();
     private List<Invoice> invoiceList = new ArrayList<>();

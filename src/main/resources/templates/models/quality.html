@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+  <title>Quality</title>
+  <th:block th:insert="parts/webjars :: webjars"></th:block>
+  <th:block th:insert="parts/static :: static"></th:block>
+</head>
+
+<body>
+<th:block th:insert="parts/header :: header"></th:block>
+
+<main class="main" style="padding-top: 50px;">
+
+  <section class="section">
+    <div class="row">
+
+      <div class="col-lg-6 mx-auto rounded shadow">
+        <div class="container py-5">
+          <div class="table-responsive">
+                <table class="table table-fixed table-hover">
+                  <h2 class="card-title text-center">Sifatlar Ro'yhati</h2>
+                  <thead>
+                  <tr>
+                    <th scope="col" class="col-1">Id</th>
+                    <th scope="col" class="col-3">Name</th>
+                    <th scope="col" class="col-2">Description</th>
+                    <th scope="col" class="col-2">Note</th>
+                    <th scope="col" class="col-2">Edit</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')" scope="col" class="col-2">Delete</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <th:block th:each="quality : ${qualities}" >
+                    <tr>
+                      <td class="col-1" th:text="${quality.getId()}"></td>
+                      <td class="col-3" th:text="${quality.getName()}"></td>
+                      <td class="col-2" th:text="${quality.getDescription()}"></td>
+                      <td class="col-2" th:text="${quality.getNotes()}"></td>
+                      <td class="col-2" ><a class="h5" th:href="@{'/quality/u/' + ${quality.getId()}}">Edit</a></td>
+                      <td sec:authorize="hasRole('ROLE_ADMIN')" class="col-2" ><a class="h5" th:href="@{'/quality/' + ${quality.getId()}}">Delete</a></td>
+                    </tr>
+                  </th:block>
+                </table>
+              </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-6 mx-auto rounded shadow">
+        <div class="container py-5">
+          <div class="row">
+              <form th:action="@{/quality}" th:object="${quality}" th:method="post" class="" style="max-width: 700px; margin: 0 auto;">
+
+                <div class="border border-secondary rounded m-5">
+                  <div th:if="${message}" class="alert alert-success text-center">[[${message}]]</div>
+                  <h2 class="card-title text-center">Yangi Sifat Kiritish</h2>
+
+                  <div class="row m-4">
+                    <label class="col-sm-3 ">ID</label>
+                    <div class="col">
+                      <input disabled class="form-control" th:field="*{id}"/>
+                      <input type="hidden" th:field="*{id}"/>
+                    </div>
+                  </div>
+
+
+                  <div class="row m-4">
+                    <label class="col-sm-3 ">Nomi</label>
+                    <div class="col">
+                      <input th:field="*{name}" th:required="required" type="text" class="form-control"/>
+                    </div>
+                  </div>
+
+                  <div class="row m-4">
+                    <label class="col-sm-3 ">Qo'shimcha malumot</label>
+                    <div class="col">
+                      <input th:field="*{description}" type="text" class="form-control"/>
+                    </div>
+                  </div>
+
+                  <div class="row m-4">
+                    <label class="col-sm-3 ">Qo'shimcha malumot2</label>
+                    <div class="col">
+                      <input th:field="*{notes}" type="text" class="form-control"/>
+                    </div>
+                  </div>
+
+                  <div class="text-center m-4">
+                    <button type="submit" class="btn btn-primary" m-3>Yangi Kiritish</button>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+</main>
+
+<style th:inline="css">
+  .table-fixed tbody {
+    height: 600px;
+    overflow-y: auto;
+    width: 100%;
+  }
+  .table-fixed thead,
+  .table-fixed tbody,
+  .table-fixed tr,
+  .table-fixed td,
+  .table-fixed th {
+    display: block;
+  }
+  .table-fixed tr:after {
+    content: "";
+    display: block;
+    visibility: hidden;
+    clear: both;
+  }
+  .table-fixed tbody td,
+  .table-fixed thead > tr > th {
+    float: left;
+  }
+</style>
+
+
+</body>
+
+</html>

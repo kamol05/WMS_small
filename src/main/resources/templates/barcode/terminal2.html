@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+  <form th:action="@{/terminal/3}" th:object="${dto}" th:method="post" style="max-width: 150px; margin: 0 auto;">
+    <fieldset>
+        <div>
+
+          <div class="row" style="margin: 5%">
+            <label th:if="${message}" >[[${message}]]</label>
+          </div>
+
+          <label class="">BARCODE NOMER: </label>
+          <input type="number" name="serial" id="serialInput" onkeypress="return isNumber(event)">
+
+          <div class="row" style="margin: 5%">
+            <input type="hidden" th:field="*{invoice}"/>
+            <label class="column" for="id">DOC NO: </label>
+            <label class="column" id="id" th:text="${dto.getInvoice().getId()}"></label>
+          </div>
+
+          <div class="row" style="margin: 5%">
+            <label type="hidden" th:text="${dto.getInvoice().getCustomer().getName()}"></label>
+          </div>
+
+          <div class="row" style="margin: 5%">
+            <label class="column" for="DEL">UCHIR: </label>
+            <input class="column"  id="DEL" type="checkbox"  th:field="*{delete}" style="width: 20px; height: 20px; margin-left: 20%; "/>
+          </div>
+
+          <div style="margin: 5%">
+            <a th:href="@{'/terminal/3/' + ${dto.getInvoice().getId()}}" style="width: 100px; height: 40px; margin: 0 auto " >RO'YXAT</a>
+          </div>
+        </div>
+
+        <bgsound th:if="${ok}" th:src="@{/sound/ok.wav}" loop="0" volume="100"/>
+        <bgsound th:if="${error}" th:src="@{/sound/hata.wav}" loop="0" volume="100"/>
+
+    </fieldset>
+
+<!--      <audio th:if="${ok}" th:src="@{/sound/ok.wav}"></audio>-->
+<!--      <audio th:if="${error}" th:src="@{/sound/hata.wav}"></audio>-->
+</form>
+
+
+<style th:inline="css">
+  h1 {text-align: center;}
+  p {text-align: center;}
+  div {text-align: center;}
+  input {
+    width: 150px;
+    min-width: 150px;
+    font-size: 30px;
+  }
+  label{
+    width: 12px;
+    height: 12px;
+    font-size: 12px;
+  }
+  {
+    box-sizing: border-box;
+  }
+  .column {
+    float: left;
+    width: 50%;
+  }
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+</style>
+
+<script type="text/javascript">
+
+  onload = document.getElementById('serialInput').focus();
+
+  // document.addEventListener('DOMContentLoaded', function(){
+  //     document.getElementById('serialInput').focus();
+  // });
+
+  function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+      return false;
+    }
+    return true;
+  }
+
+</script>
+
+
+</body>
+</html>

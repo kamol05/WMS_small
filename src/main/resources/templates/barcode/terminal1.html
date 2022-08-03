@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+<form th:action="@{/terminal/2}" th:object="${dto}" th:method="get" class="container py-lg-5"
+      style="max-width: 300px; max-height: 300px; margin: 0 auto;" >
+  <div class="border border-secondary rounded p-md-3">
+    <fieldset>
+
+      <div class="row" style="margin: 5%">
+        <label th:if="${error}" >[[${error}]]</label>
+      </div>
+
+      <label class="text-center">NAKLADNOYNI TANLANG! </label>
+
+        <div style="margin: 5%">
+          <select th:field="*{invoice}" th:required="required"
+                  oninvalid="this.setCustomValidity('Klientni Tanshalsh kerak!!')"
+                  oninput="setCustomValidity('')"
+                  style="height: 50px; width: 150px"
+                  id="selec"
+          >
+            <option value="" selected></option>
+            <option value="" th:each="invoice : ${invoices}"
+                    th:value="${invoice.getId()}"
+                    th:text="${invoice.getId()}"
+            >
+            </option>
+          </select>
+
+        </div>
+
+<!--      <div style="margin: 5%">-->
+<!--        <input type="number" style="height: 30px; width: 150px"/>-->
+<!--      </div>-->
+
+      <div style="margin: 5%">
+        <button type="submit" style="height: 50px; width: 150px">SOTISHNI BOSHLA</button>
+      </div>
+
+
+    </fieldset>
+  </div>
+</form>
+
+<style th:inline="css">
+  input {
+    max-width: 200px;
+    width: 200px;
+    min-width: 50px;
+    height: 100%;
+    max-height: 50%;
+    font-size: 30px;
+  }
+  label{
+    max-width: 200px;
+    width: 200px;
+    min-width: 20px;
+    height: 100%;
+    max-height: 50%;
+    font-size: 20px;
+  }
+</style>
+
+<script type="text/javascript">
+  function cancelForm(){
+    window.location = "[[@{/logout}]]";
+  }
+  function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+      return false;
+    }
+    return true;
+  }
+  var checker = document.getElementById('checkme');
+  var sendbtn = document.getElementById('karton');
+  checker.onchange = function() {
+    sendbtn.disabled = !this.checked;
+  };
+</script>
+
+
+</body>
+</html>

@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uz.sngroup.service.report.StockService;
 
+import javax.jws.WebParam;
+
 @Controller
 @RequestMapping("/stock")
-public class StockController {
+public class StockReportController {
     @Autowired
     StockService stockService;
 
@@ -21,7 +23,8 @@ public class StockController {
     }
 
     @GetMapping("/{id}")
-    public String getAllByProductId(@PathVariable Long id){
-        return "redirect:/stock";
+    public String getAllByProductId(@PathVariable Long id, Model model){
+        model.addAttribute("events", stockService.getAllByProductId(id));
+        return "report/reportinstockbyproductid";
     }
 }

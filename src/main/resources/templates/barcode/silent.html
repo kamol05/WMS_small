@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <div th:insert="parts/webjars :: webjars"></div>
+  <div th:insert="parts/static :: static"></div>
+</head>
+<body>
+
+<form th:action="@{/logout}" th:method="post"  style="max-width: 500px; margin: 0 auto;">
+  <div class="row m-4" >
+    <div class="col">
+      <h3 class="card-title text-center">Barkod Bosish</h3>
+    </div>
+    <div class="col">
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary m-3">CHIQISH</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div th:if="${m1}" class="alert alert-success text-center">[[${m1}]]</div>
+
+
+
+<form th:action="@{/barcode}" th:method="post" th:object="${barcode}"  style="max-width: 500px; margin: 0 auto;">
+  <div class="border border-secondary rounded p-md-3">
+
+    <div class="row m-4">
+      <label class="col-sm-3">Artikul</label>
+      <div class="col">
+        <select class="form-select" aria-label="Default select example" th:field="*{quality}" th:required="required"
+                oninvalid="this.setCustomValidity('Artikulni Tanshalsh kerak!!')"
+                oninput="setCustomValidity('')"
+        >
+          <option value="" selected></option>
+          <option value="" th:each="quality : ${qualities}"
+                  th:value="${quality.getId()}"
+                  th:text="${quality.getName()}" >
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-sm-3">Grammaj</label>
+      <div class="col">
+        <select class="form-select" aria-label="Default select example" th:field="*{gramm}" th:required="required"
+                oninvalid="this.setCustomValidity('Grammajni Tanshalsh kerak!!')"
+                oninput="setCustomValidity('')"
+        >
+          <option value="" selected></option>
+          <option value="" th:each="gramm : ${gramms}"
+                  th:value="${gramm.getId()}"
+                  th:text="${gramm.getWeight()}" >
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-sm-3">RANG</label>
+      <div class="col">
+        <select class="form-select" aria-label="Default select example" th:field="*{color}" th:required="required"
+                oninvalid="this.setCustomValidity('Rangni Tanshalsh kerak!!')"
+                oninput="setCustomValidity('')"
+        >
+          <option value="" selected></option>
+          <option value="" th:each="color : ${colors}"
+                  th:value="${color.getId()}"
+                  th:text="${color.getName()}" >
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-sm-4 ">ENI</label>
+      <div class="col">
+        <input  th:value="0" th:field="*{width}" type="text" class="form-control" id="eni" placeholder="ENI"
+                onkeypress="return isNumber(event)" onpaste="return false;"
+                th:required="required"
+                oninvalid="this.setCustomValidity('ENINI YOZISH KERAK!!')"
+                oninput="setCustomValidity('')"
+        />
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-sm-4 ">UZUNLIGI</label>
+      <div class="col">
+        <input  th:value="3000" th:field="*{height}" type="text" class="form-control" id="uzunligi" placeholder="UZUNLIGI"
+                onkeypress="return isNumber(event)" onpaste="return false;"
+                th:required="required"
+                oninvalid="this.setCustomValidity('UZUNLIGINI YOZISH KERAK!!')"
+                oninput="setCustomValidity('')"
+        />
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-sm-4 ">OG'IRLIGI</label>
+      <div class="col">
+        <input  th:value="0" th:field="*{weight}" type="text" class="form-control" id="weight" placeholder="OG'IRLIGI"
+                onkeypress="return isNumber(event)" onpaste="return false;"
+                th:required="required"
+                oninvalid="this.setCustomValidity('OG\'IRLIGINI YOZISH KERAK!!')"
+                oninput="setCustomValidity('')"
+        />
+      </div>
+    </div>
+
+    <div class="row m-4">
+      <label class="col-sm-5 ">KARTON DONASI</label>
+      <div class="col-sm-1">
+        <input class="big-checkbox" type="checkbox" id="checkme" />
+      </div>
+      <div class="col">
+        <input  th:field="*{pieces}" type="text" class="form-control" id="karton" placeholder="pachka ichida qancha" disabled="true"
+                onkeypress="return isNumber(event)" onpaste="return false;"
+        />
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary" m-3>BARKOD BOSISH</button>
+    </div>
+
+    <div th:if="${m2}" class="alert alert-success text-center">[[${m2}]]</div>
+
+  </div>
+</form>
+
+
+<script type="text/javascript">
+  function cancelForm(){
+    window.location = "[[@{/logout}]]";
+  }
+
+  function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+      return false;
+    }
+    return true;
+  }
+  var checker = document.getElementById('checkme');
+  var sendbtn = document.getElementById('karton');
+  checker.onchange = function() {
+    sendbtn.disabled = !this.checked;
+  };
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

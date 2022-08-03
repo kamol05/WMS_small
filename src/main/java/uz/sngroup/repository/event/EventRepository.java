@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
+    List<Event> getBySerial(Integer serial);
     Optional<Event> getBySerialAndEventType(Integer serial, EventType type);
 
     @Query(value = "select\n" +
@@ -35,8 +36,18 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             nativeQuery = true )
     List<Event> selectGroupByProductId();
 
+    List<Event> getAllByProduct_Id(Long id);
+
+    @Query(value = "select * " +
+                    "from events " +
+                    "where product_id = ?1 and event_type = 'IN' and serial not in " +
+                    "(" +
+                    "select serial from events where product_id = ?1 and event_type = 'SALE'" +
+                    ")",
+            nativeQuery = true)
+    List<Event> getAllByProductIDSpecial(Long id);
+
     Optional<Event> getBySerialAndEventTypeNot(Integer serial, EventType type);
     Integer getTopByOrderBySerial();
-    List<Event> getBySerial(Integer serial);
     Optional<Event> getBySerialAndEventTypeNotIn(Integer serial, List<EventType> type);
 }

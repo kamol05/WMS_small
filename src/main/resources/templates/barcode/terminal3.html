@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+<form th:action="@{/terminal/3}" th:object="${dto}" th:method="post" style="max-width: 150px; margin: 0 auto;">
+  <input type="hidden" th:field="*{invoice}"/>
+  <fieldset>
+    <button type="submit" style="width: 100px; height: 20px; margin-left: 40px;" >ORQAGA</button>
+    <table>
+        <thead>
+        <tr>
+          <th>NOMI</th>
+          <th>DONA</th>
+          <th>PACH.</th>
+          <th>RANG</th>
+          <th>M2</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="event : ${saleevents}" >
+          <tr>
+            <td th:text="${event.getProduct().getName()}"></td>
+            <td th:text="${event.getPieces()}"></td>
+            <td th:text="${event.getCount()}"></td>
+            <td th:text="${event.getProduct().getColor().getName()}"></td>
+            <td th:text="${#numbers.formatDecimal(event.getM2(), 0, 2)}"></td>
+          </tr>
+        </th:block>
+      </table>
+  </fieldset>
+</form>
+
+<style th:inline="css">
+    td {text-align: center;}
+  th {
+    width: 30px;
+    font-size: 10px;
+  }
+  td {
+    width: 30px;
+    font-size: 10px;
+  }
+</style>
+
+</body>
+</html>

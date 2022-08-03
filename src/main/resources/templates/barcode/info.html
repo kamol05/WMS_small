@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <div th:insert="parts/webjars :: webjars"></div>
+    <div th:insert="parts/static :: static"></div>
+</head>
+<body >
+
+<div th:if="${message}" class="alert alert-success text-center" style="max-width: 500px; margin: 0 auto;">[[${message}]]</div>
+
+<form th:action="@{/barcode/info}" th:method="get"  style="max-width: 500px; margin: 0 auto;">
+    <div class="border border-secondary rounded p-md-3">
+        <div class="row m-2" >
+            <div class="col">
+                <h3 class="card-title text-center">Barkod Izlash</h3>
+            </div>
+
+            <div class="row">
+                <div class="col align-content-center">
+                    <input name="serial" type="text" class="form-control" id="eni" placeholder="BARKOD NOMER"
+                            onkeypress="return isNumber(event)" onpaste="return false;"
+                            th:required="required"
+                            oninvalid="this.setCustomValidity('BARKOD NOMERINI YOZISH KERAK!!')"
+                            oninput="setCustomValidity('')"
+                    />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary m-3">Izlash</button>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <a class="btn btn-primary m-3" th:href="@{/}" >Bosh Menu</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<form th:action="@{/barcode/delete}" th:method="get" name="serial" style="max-width: 900px; margin: 0 auto;">
+        <div th:if="${events}" class="border border-secondary rounded" >
+
+                <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>MAHSULOT NOMI</th>
+            <th>RANG</th>
+            <th>GRAMM</th>
+            <th>M2</th>
+            <th>OG'IRLIK</th>
+            <th>DONASI</th>
+            <th>PACHKA</th>
+            <th>IN/OUT</th>
+            <th>SANA</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="event : ${events}" >
+            <tr>
+                <td th:text="${event.getProduct().getName()}"></td>
+                <td th:text="${event.getProduct().getColor().getName()}"></td>
+                <td th:text="${event.getProduct().getGramm().getWeight()}"></td>
+                <td th:text="${#numbers.formatDecimal(event.getM2(), 0, 2)}"></td>
+                <td th:text="${event.getWeight()}"></td>
+                <td th:text="${event.getPieces()}"></td>
+                <td th:text="${event.getCount()}"></td>
+                <td th:text="${event.getEventType()}"></td>
+                <td th:text="${#dates.format(event.getDate(), 'HH:mm:ss dd-MM-yy')}"></td>
+            </tr>
+        </th:block>
+
+        </table>
+
+                <input name="serial" type="hidden" th:value="${serial}"/>
+
+                <div sec:authorize="hasRole('ROLE_USER')" class="col">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-danger m-3">O'CHIRISH!!</button>
+                    </div>
+                </div>
+        </div>
+
+</form>
+
+
+
+
+
+
+<script type="text/javascript">
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>

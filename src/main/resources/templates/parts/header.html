@@ -1,0 +1,76 @@
+<th:block th:fragment="header">
+    <header id="header" class="header fixed-top d-flex align-items-center bg-dark">
+        <div class="d-flex">
+            <a href="/" class="d-flex align-items-center">
+                <span class="d-none d-lg-block text-light" style="font-size: 22px; width: 150px; ">SN-GROUP-3</span>
+            </a>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_BARKOD')" class="btn-group m-2">
+            <a class="btn btn-light" th:href="@{/barcode}" >Barcode Bosish</a>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_USER')" class="btn-group m-2">
+            <a class="btn btn-light" th:href="@{/invoice}" >Sotuv</a>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_USER')" class="btn-group m-2">
+            <a class="btn btn-light" th:href="@{/terminal}" >Terminal</a>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_USER')" class="btn-group m-2">
+            <a class="btn btn-light" th:href="@{/stock}" >Mahsulotlar qoldig'i</a>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_USER')" class="btn-group m-2">
+            <button class="btn btn-light dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" id="myd1">
+                Malumotlar
+            </button>
+            <div class="dropdown-menu">
+<!--                <a class="dropdown-item" th:href="@{/quality}"  >Artikullar</a>-->
+                <a class="dropdown-item" th:href="@{/quality}"  >Artikullar</a>
+                <a class="dropdown-item" th:href="@{/color}"    >Ranglar</a>
+                <a class="dropdown-item" th:href="@{/customer}" >Xarirdorlar</a>
+                <a class="dropdown-item" th:href="@{/gramm}"    >Og'irlik</a>
+            </div>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_USER')" class="btn-group m-2">
+            <button class="btn btn-light dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" id="myd2">
+                Hisobotlar
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Kunlik</a>
+                <a class="dropdown-item" href="#">Oylik</a>
+                <a class="dropdown-item" href="#">Yillik</a>
+                <a class="dropdown-item" href="#"></a>
+            </div>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_BARKOD')" class="btn-group m-2">
+            <a class="btn btn-light" th:href="@{/barcode/info}" >Barkod Uchirish</a>
+        </div>
+
+        <form th:action="@{/logout}" th:method="post"  >
+            <div class="col">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-danger m-2">Chiqish</button>
+                </div>
+            </div>
+        </form>
+
+        <form class="form-inline d-flex align-items-center" action="#" style="margin-left: 20%;">
+            <input class="form-control mr-sm-2 m-1" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0 m-1" type="submit">Search</button>
+        </form>
+    </header>
+    <script type="text/javascript">
+        $('#myd1').on('click', function() {
+            $("#myd1").dropdown("toggle");
+        });
+        $('#myd2').on('click', function() {
+            $("#myd2").dropdown("toggle");
+        });
+    </script>
+
+</th:block>

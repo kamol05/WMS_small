@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <title>SKLAD ASTATKA</title>
+    <th:block th:insert="parts/webjars :: webjars"></th:block>
+    <th:block th:insert="parts/static :: static"></th:block>
+</head>
+<body>
+<th:block th:insert="parts/header :: header"></th:block>
+
+<main class="main" style="padding-top: 50px;">
+
+    <section class="section">
+        <div class="container p-0">
+
+            <table class="table table-hover">
+                            <h2 class="card-title text-center">MAVJUD YUKLAR RO'YHATI</h2>
+                            <thead>
+                            <tr>
+                                <th>ID:</th>
+                                <th>MAHSULOT NOMI</th>
+                                <th>RANG/MM</th>
+                                <th>GRAMM</th>
+                                <th>M2</th>
+                                <th>OG'IRLIK/...</th>
+                                <th>DONASI</th>
+                                <th>PACHKA/RULON</th>
+                                <th>DONALAB KO'RISH</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="event : ${events}" >
+                                <tr>
+                                    <td th:text="${event.getId()}"></td>
+                                    <td th:text="${event.getProduct().getName()}"></td>
+                                    <td th:text="${event.getProduct().getColor().getName()}"></td>
+                                    <td th:text="${event.getProduct().getGramm().getWeight()}"></td>
+                                    <td th:text="${#numbers.formatDecimal(event.getM2(), 0, 2)}"></td>
+                                    <td th:text="${event.getWeight()}"></td>
+                                    <td th:text="${event.getPieces()}"></td>
+                                    <td th:text="${event.getCount()}"></td>
+                                    <td ><a class="h5" th:href="@{'/stock/' + ${event.getId()}}">DONALAB</a></td>
+                                </tr>
+                            </th:block>
+
+                        </table>
+        </div>
+    </section>
+
+</main>
+
+<style th:inline="css">
+</style>
+
+
+</body>
+
+</html>
