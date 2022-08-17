@@ -35,10 +35,10 @@
                     <tr>
                       <td class="col-1" th:text="${quality.getId()}"></td>
                       <td class="col-3" th:text="${quality.getName()}"></td>
-                      <td class="col-2" th:text="${quality.getDescription()}"></td>
-                      <td class="col-2" th:text="${quality.getNotes()}"></td>
-                      <td class="col-2" ><a class="h5" th:href="@{'/quality/u/' + ${quality.getId()}}">Edit</a></td>
-                      <td sec:authorize="hasRole('ROLE_ADMIN')" class="col-2" ><a class="h5" th:href="@{'/quality/' + ${quality.getId()}}">Delete</a></td>
+                      <td class="col-2 cus-h" th:text="${quality.getDescription()}"></td>
+                      <td class="col-2 cus-h" th:text="${quality.getNotes()}"></td>
+                      <td class="col-2 cus-h" ><a class="h5" th:href="@{'/quality/u/' + ${quality.getId()}}">Edit</a></td>
+                      <td sec:authorize="hasRole('ROLE_ADMIN')" class="col-2 cus-h" ><a class="h5" th:href="@{'/quality/' + ${quality.getId()}}">Delete</a></td>
                     </tr>
                   </th:block>
                 </table>

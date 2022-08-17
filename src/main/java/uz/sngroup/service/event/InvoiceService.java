@@ -58,7 +58,7 @@ public class InvoiceService {
 //        File file = ResourceUtils.getFile("classpath:logo.jpg");
 //        parameters.put("logo", file.getPath());  // for developing
 
-        parameters.put("logo", getClass().getResource("logo.jpg").getPath()); //for production
+//        parameters.put("logo", getClass().getResource("logo.jpg").getPath()); //for production
         parameters.put("customer", invoice.getCustomer().getName());
         parameters.put("invoiceId",invoice.getId());
         parameters.put("warehouseMan", invoice.getWarehouseMan());
