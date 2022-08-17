@@ -29,14 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/**");
-//    }
-
     private static final String[] PUBLIC_MATCHERS = {
             "/login",
             "/login?error",
+            "/pivot/onfirststart",
             "/terminal/**",
             "/webjars/**",
             "/sound/**",

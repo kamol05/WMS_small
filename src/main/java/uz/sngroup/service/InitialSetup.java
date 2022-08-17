@@ -2,6 +2,7 @@ package uz.sngroup.service;
 
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +30,13 @@ import java.util.Random;
 
 @Component
 public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> {
+
+    public void onFisrtStart(){
+        addUsers();
+        addCounter();
+        fillObjects();
+    }
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 //        addUsers();
@@ -98,7 +106,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
         colorList = colorRepository.findAll();
         invoiceList = invoiceRepository.findAll();
         List<Barcode> barcodeList = new ArrayList<>();
-        for (int i = 0; i < 10_00; i++) {
+        for (int i = 0; i < 100; i++) {
             Barcode barcode = new Barcode();
             barcode.setQuality( qualityList.get(r.nextInt(qualityList.size())).getId() );
             barcode.setColor(colorList.get(r.nextInt(colorList.size())).getId());
@@ -112,7 +120,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             barcodeService.init(b);
         }
         eventList = eventRepository.findAll();
-        for (int i = 0; i < 5_00; i++) {
+        for (int i = 0; i < 50; i++) {
             terminalService.sell(invoiceList.get(r.nextInt(invoiceList.size())), eventList.get(r.nextInt(eventList.size())).getSerial());
         }
     }
