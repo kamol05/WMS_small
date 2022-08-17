@@ -40,6 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/terminal/**",
             "/webjars/**",
             "/sound/**",
+            "/js/**",
+            "/css/**",
             "/vendor/**"
     };
 

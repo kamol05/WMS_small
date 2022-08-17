@@ -121,10 +121,10 @@
 
     <div class="row m-4">
       <label class="col-sm-5 ">KARTON DONASI</label>
-      <div class="col-sm-1">
-        <input class="big-checkbox" type="checkbox" id="checkme" />
-      </div>
       <div class="col">
+        <input class="col" type="checkbox" id="checkme" style="height: 30px; width: 30px; margin-top: 15%"/>
+      </div>
+      <div class="col-sm-5">
         <input  th:field="*{pieces}" type="text" class="form-control" id="karton" placeholder="pachka ichida qancha" disabled="true"
                 onkeypress="return isNumber(event)" onpaste="return false;"
         />
@@ -134,10 +134,10 @@
 
     <div class="row m-4">
       <label class="col-sm-5 ">BARKOD SONI</label>
-      <div class="col-sm-1">
-        <input class="big-checkbox" type="checkbox" id="checkme2" />
-      </div>
       <div class="col">
+        <input class="col" type="checkbox" id="checkme2" style="height: 30px; width: 30px; margin-top: 15%"/>
+      </div>
+      <div class="col-sm-5">
         <input  th:field="*{quantity}" type="text" class="form-control" id="karton2" placeholder="qancha barkod bosish kerak" disabled="true"
                 onkeypress="return isNumber(event)" onpaste="return false;"
         />
@@ -145,7 +145,7 @@
     </div>
 
     <div class="text-center">
-      <button type="submit" class="btn btn-primary" m-3>BARKOD BOSISH</button>
+      <button type="submit" class="btn btn-outline-success" m-3>BARKOD BOSISH</button>
     </div>
 
     <div th:if="${m2}" class="alert alert-success text-center">[[${m2}]]</div>

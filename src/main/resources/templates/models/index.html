@@ -4,20 +4,46 @@
 <head>
 
   <title>Bosh Sahifa</title>
-  <th:block th:insert="parts/webjars :: webjars"></th:block>
-  <th:block th:insert="parts/static :: static"></th:block>
+  <th:block th:insert="parts/webjars :: webjars"></th:block> // part1
+  <th:block th:insert="parts/static :: static"></th:block>  // part2
 
 
 </head>
 
 <body>
 
-<th:block th:insert="parts/header :: header"></th:block>
+  <th:block th:insert="parts/header :: header"></th:block> // part3
 
-<main>
-  <img th:src="@{sound/wall.jpg}" style="width: 100%; height: 50%" />
+
+<main class="main" id="main">
+  <img th:src="@{sound/wall.jpg}" class="respons"  />
 </main>
 
 </body>
+
+
+<script type="text/javascript">
+
+  let dropdownMenu = document.querySelectorAll(".dropdown-menu")
+  let menu2 = document.querySelector(".menu-2")
+
+  $('#main').on('click', function() {
+    $(dropdownMenu).removeClass("show");
+  });
+
+  $('#myd1').on('click', function() {
+    $(".menu-1").addClass("show");
+    menu2.classList.remove("show")
+    // $(".menu-2").removeClass("show");
+  });
+
+  $('#myd2').on('click', function() {
+    $(".menu-2").addClass("show");
+    $(".menu-1").removeClass("show");
+  });
+
+
+
+</script>
 
 </html>

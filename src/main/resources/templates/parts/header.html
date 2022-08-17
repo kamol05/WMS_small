@@ -2,7 +2,8 @@
     <header id="header" class="header fixed-top d-flex align-items-center bg-dark">
         <div class="d-flex">
             <a href="/" class="d-flex align-items-center">
-                <span class="d-none d-lg-block text-light" style="font-size: 22px; width: 150px; ">SN-GROUP-3</span>
+                <img src="/logo.jpg"  alt="">
+                <span class="d-none d-lg-block text-light m-2 card-text" style="font-size: 22px; width: 150px; ">SN-GROUP-3</span>
             </a>
         </div>
 
@@ -15,10 +16,6 @@
         </div>
 
         <div sec:authorize="hasRole('ROLE_USER')" class="btn-group m-2">
-            <a class="btn btn-light" th:href="@{/terminal}" >Terminal</a>
-        </div>
-
-        <div sec:authorize="hasRole('ROLE_USER')" class="btn-group m-2">
             <a class="btn btn-light" th:href="@{/stock}" >Mahsulotlar qoldig'i</a>
         </div>
 
@@ -26,8 +23,7 @@
             <button class="btn btn-light dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" id="myd1">
                 Malumotlar
             </button>
-            <div class="dropdown-menu">
-<!--                <a class="dropdown-item" th:href="@{/quality}"  >Artikullar</a>-->
+            <div class="dropdown-menu menu-1 mt-5">
                 <a class="dropdown-item" th:href="@{/quality}"  >Artikullar</a>
                 <a class="dropdown-item" th:href="@{/color}"    >Ranglar</a>
                 <a class="dropdown-item" th:href="@{/customer}" >Xarirdorlar</a>
@@ -39,7 +35,7 @@
             <button class="btn btn-light dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" id="myd2">
                 Hisobotlar
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu menu-2 mt-5">
                 <a class="dropdown-item" href="#">Kunlik</a>
                 <a class="dropdown-item" href="#">Oylik</a>
                 <a class="dropdown-item" href="#">Yillik</a>
@@ -47,12 +43,16 @@
             </div>
         </div>
 
-        <div sec:authorize="hasRole('ROLE_BARKOD')" class="btn-group m-2">
+        <div sec:authorize="hasRole('ROLE_BARKOD')" class="btn-group m-2 ">
             <a class="btn btn-light" th:href="@{/barcode/info}" >Barkod Uchirish</a>
         </div>
 
+        <div sec:authorize="hasRole('ROLE_USER')" class="btn-group m-2">
+            <a class="btn btn-light" th:href="@{/terminal}" >Terminal</a>
+        </div>
+
         <form th:action="@{/logout}" th:method="post"  >
-            <div class="col">
+            <div >
                 <div class="text-center">
                     <button type="submit" class="btn btn-danger m-2">Chiqish</button>
                 </div>
@@ -65,12 +65,48 @@
         </form>
     </header>
     <script type="text/javascript">
+
+        let dropdownMenu = document.querySelectorAll(".dropdown-menu")
+        let menu2 = document.querySelector(".menu-2")
+
+        $('#main').on('click', function() {
+            $(dropdownMenu).removeClass("show");
+        });
+
         $('#myd1').on('click', function() {
-            $("#myd1").dropdown("toggle");
+            $(".menu-1").addClass("show");
+            menu2.classList.remove("show")
+            // $(".menu-2").removeClass("show");
         });
+
         $('#myd2').on('click', function() {
-            $("#myd2").dropdown("toggle");
+            $(".menu-2").addClass("show");
+            $(".menu-1").removeClass("show");
         });
+
+
+
     </script>
+<!--    <script type="text/javascript">-->
+
+<!--        let main = document.querySelector(".main")-->
+<!--        // let dropdownMenu = document.querySelector("dropdown-menu")-->
+<!--        // yoki jquery sihloptumi faqat ?   xaa shunaqa bolopti-->
+
+<!--        $('#main').on('click', function() {-->
+<!--            alert("sss")-->
+<!--        });-->
+
+<!--        $('#myd1').on('click', function() {-->
+<!--            $("#myd1").dropdown("toggle");-->
+<!--        });-->
+
+<!--        $('#myd2').on('click', function() {-->
+<!--            $("#myd2").dropdown("toggle");-->
+<!--        });-->
+
+
+
+<!--    </script>-->
 
 </th:block>

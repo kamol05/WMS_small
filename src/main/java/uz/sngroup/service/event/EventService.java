@@ -102,6 +102,6 @@ public class EventService {
             return "Bu Barkod Sotilgan!!";
         }
         events.forEach(o -> delete(o.getId()));
-        return "BARKOD O'CHIRILDI";
+        return "BARKOD O'CHIRILDI  " + serial;
     }
 }

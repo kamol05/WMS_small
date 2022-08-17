@@ -1,4 +1,6 @@
 package uz.sngroup.model.event;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -44,9 +46,11 @@ public class Event {
     @Enumerated(value = EnumType.STRING)
     private EventType eventType;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_product"))
     private Product product;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_user"))

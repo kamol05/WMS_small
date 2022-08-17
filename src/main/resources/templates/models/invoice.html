@@ -40,9 +40,9 @@
                                     <td class="col-3" th:text="${invoice.getCustomer().getName()}"></td>
                                     <td class="col-2" th:text="${invoice.getWarehouseMan()}"></td>
                                     <td class="col-1" th:text="${invoice.getNakNo()}"></td>
-                                    <td class="col-1" ><a class="h5" th:href="@{'/invoice/p/' + ${invoice.getId()}}">PRINT</a></td>
-                                    <td class="col-1" ><a class="h5" th:href="@{'/invoice/u/' + ${invoice.getId()}}">EDIT</a></td>
-                                    <td sec:authorize="hasRole('ROLE_ADMIN')" class="col-1" ><a class="h5" th:href="@{'/invoice/' + ${invoice.getId()}}">DELETE</a></td>
+                                    <td class="col-1" ><a class="h6" th:href="@{'/invoice/p/' + ${invoice.getId()}}">PRINT</a></td>
+                                    <td class="col-1" ><a class="h6" th:href="@{'/invoice/u/' + ${invoice.getId()}}">EDIT</a></td>
+                                    <td class="col-1" sec:authorize="hasRole('ROLE_ADMIN')" ><a class="h6" th:href="@{'/invoice/' + ${invoice.getId()}}">DELETE</a></td>
                                 </tr>
                             </th:block>
                         </table>

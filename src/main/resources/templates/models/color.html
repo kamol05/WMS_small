@@ -35,10 +35,10 @@
                                 <tr>
                                     <td class="col-1" th:text="${color.getId()}"></td>
                                     <td class="col-3" th:text="${color.getName()}"></td>
-                                    <td class="col-2" th:text="${color.getDescription()}"></td>
-                                    <td class="col-2" th:text="${color.getNotes()}"></td>
-                                    <td class="col-2" ><a class="h5" th:href="@{'/color/u/' + ${color.getId()}}">Edit</a></td>
-                                    <td sec:authorize="hasRole('ROLE_ADMIN')" class="col-2" ><a class="h5" th:href="@{'/color/' + ${color.getId()}}">Delete</a></td>
+                                    <td class="col-2 cus-h" th:text="${color.getDescription()}"></td>
+                                    <td class="col-2 cus-h" th:text="${color.getNotes()}"></td>
+                                    <td class="col-2 cus-h" ><a class="h5" th:href="@{'/color/u/' + ${color.getId()}}">Edit</a></td>
+                                    <td sec:authorize="hasRole('ROLE_ADMIN')" class="col-2 cus-h" ><a class="h5" th:href="@{'/color/' + ${color.getId()}}">Delete</a></td>
                                 </tr>
                             </th:block>
                         </table>
@@ -102,32 +102,8 @@
 
 </main>
 
-<style th:inline="css">
-    .table-fixed tbody {
-        height: 600px;
-        overflow-y: auto;
-        width: 100%;
-    }
-    .table-fixed thead,
-    .table-fixed tbody,
-    .table-fixed tr,
-    .table-fixed td,
-    .table-fixed th {
-        display: block;
-    }
-    .table-fixed tr:after {
-        content: "";
-        display: block;
-        visibility: hidden;
-        clear: both;
-    }
-    .table-fixed tbody td,
-    .table-fixed thead > tr > th {
-        float: left;
-    }
-</style>
-
 
 </body>
 
 </html>
+

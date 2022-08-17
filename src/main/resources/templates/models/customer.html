@@ -35,10 +35,10 @@
                                 <tr>
                                     <td class="col-1" th:text="${customer.getId()}"></td>
                                     <td class="col-3" th:text="${customer.getName()}"></td>
-                                    <td class="col-2" th:text="${customer.getDescription()}"></td>
-                                    <td class="col-2" th:text="${customer.getNotes()}"></td>
-                                    <td class="col-2" ><a class="h5" th:href="@{'/customer/u/' + ${customer.getId()}}">Edit</a></td>
-                                    <td sec:authorize="hasRole('ROLE_ADMIN')" class="col-2" ><a class="h5" th:href="@{'/customer/' + ${customer.getId()}}">Delete</a></td>
+                                    <td class="col-2 cus-h" th:text="${customer.getDescription()}"></td>
+                                    <td class="col-2 cus-h" th:text="${customer.getNotes()}"></td>
+                                    <td class="col-2 cus-h"  ><a class="h5" th:href="@{'/customer/u/' + ${customer.getId()}}">Edit</a></td>
+                                    <td class="col-2 cus-h" sec:authorize="hasRole('ROLE_ADMIN')" ><a class="h5" th:href="@{'/customer/' + ${customer.getId()}}">Delete</a></td>
                                 </tr>
                             </th:block>
                         </table>
@@ -102,30 +102,6 @@
 
 </main>
 
-<style th:inline="css">
-    .table-fixed tbody {
-        height: 600px;
-        overflow-y: auto;
-        width: 100%;
-    }
-    .table-fixed thead,
-    .table-fixed tbody,
-    .table-fixed tr,
-    .table-fixed td,
-    .table-fixed th {
-        display: block;
-    }
-    .table-fixed tr:after {
-        content: "";
-        display: block;
-        visibility: hidden;
-        clear: both;
-    }
-    .table-fixed tbody td,
-    .table-fixed thead > tr > th {
-        float: left;
-    }
-</style>
 
 
 </body>
