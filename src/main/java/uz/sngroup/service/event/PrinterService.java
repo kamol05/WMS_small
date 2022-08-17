@@ -1,12 +1,10 @@
 package uz.sngroup.service.event;
 
-import javafx.print.PrinterJob;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import uz.sngroup.model.event.Event;
 import javax.print.*;
-import javax.swing.*;
-import java.awt.print.PrinterException;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,9 +12,12 @@ import java.util.Date;
 @Service
 public class PrinterService {
 
+    @Value( "${send.toprinter}" )
+    private boolean print;
+
     public void print(Event event){
         try {
-            sendCommand(event);
+            if (print){ sendCommand(event); }
         } catch (PrintException e) {
             e.printStackTrace();
         }
@@ -72,15 +73,4 @@ public class PrinterService {
         return df.format(date);
     }
 
-    private void attempt3() {
-        try {
-            PrinterJob printerJob = PrinterJob.createPrinterJob();
-            JEditorPane text = new JEditorPane("file:///C:/intel/aa.txt");
-
-            PrintService service = PrintServiceLookup.lookupDefaultPrintService();
-            text.print(null, null, false, service, null, false);
-        } catch (IOException | PrinterException e) {
-            e.printStackTrace();
-        }
-    }
 }
