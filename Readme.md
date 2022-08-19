@@ -1,3 +1,6 @@
+Demo in Heroku: https://sklad-2.herokuapp.com/
+
+
 ![1](src/main/resources/images/1.bmp)
 
 ![1](src/main/resources/images/2.bmp)
