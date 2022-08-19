@@ -607,7 +607,7 @@
                         <property name="com.jaspersoft.studio.unit.width" value="px"/>
                         <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     </reportElement>
-
+                    <imageExpression><![CDATA["logo.jpg"]]></imageExpression>
                 </image>
                 <textField>
                     <reportElement x="439" y="16" width="124" height="16" uuid="52fbb535-ad2d-40ed-889b-d47133e3d3c5">
