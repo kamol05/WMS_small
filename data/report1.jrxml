@@ -71,6 +71,7 @@
 
     <sortField name="width"/>
     <sortField name="color" type="Variable"/>
+
     <variable name="color" class="java.lang.String">
         <variableExpression><![CDATA[$F{product}.getColor().getName()]]></variableExpression>
     </variable>

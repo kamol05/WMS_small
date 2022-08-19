@@ -25,7 +25,7 @@ import java.util.Map;
 public class ReportGenerator {
     @Autowired Util util;
 
-    public ResponseEntity<byte[]> getReport(List<SaleEvent> collectionDataSource, Map<String, Object> parameters, String frxmlFileName, String reportName){
+    public ResponseEntity<byte[]> getReport(List<?> collectionDataSource, Map<String, Object> parameters, String frxmlFileName, String reportName){
         frxmlFileName = frxmlFileName + ".jrxml";
         reportName = reportName + ".PDF";
         byte[] pdf = generateReport(collectionDataSource,parameters,frxmlFileName);
@@ -37,7 +37,7 @@ public class ReportGenerator {
     }
 
     @SneakyThrows
-    private byte[] generateReport(List<SaleEvent> collectionDataSource, Map<String, Object> parameters, String frxmlFileName) {
+    private byte[] generateReport(List<?> collectionDataSource, Map<String, Object> parameters, String frxmlFileName) {
         byte[] arrayOfBytes = null;
         try {
             InputStream inputStream = new FileInputStream(util.getFileFromFolder(frxmlFileName,"data"));

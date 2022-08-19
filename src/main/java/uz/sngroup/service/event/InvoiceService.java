@@ -33,7 +33,7 @@ public class InvoiceService {
     @Autowired ReportGenerator reportGenerator;
     @Autowired Util util;
 
-    public ResponseEntity<byte[]> getNewReport(Long invoiceId){
+    public ResponseEntity<byte[]> getReport(Long invoiceId){
         String frxmlFileName = "report" + 1;
         Invoice invoice = invoiceRepository.getById(invoiceId);
         List<SaleEvent> saleEventList = saleEventRepository.getByInvoice_Id(invoice.getId());
@@ -51,54 +51,6 @@ public class InvoiceService {
         parameters.put("description", invoice.getDescription());
         return reportGenerator.getReport(saleEventList, parameters, frxmlFileName, invoice.getNakNo());
     }
-
-    public ResponseEntity<byte[]> getReport(Long id, int i) throws JRException {
-        String reportName = "report" + i + ".jrxml";
-        Invoice invoice = invoiceRepository.getById(id);
-        List<SaleEvent> saleEventList = saleEventRepository.getByInvoice_Id(invoice.getId());
-
-        JasperPrint print = generateReport(invoice, saleEventList, reportName);
-        byte[] pdf = JasperExportManager.exportReportToPdf(print);
-        HttpHeaders headers = new HttpHeaders();
-        String nakno = invoice.getNakNo() + ".PDF";
-        headers.set(nakno, nakno);
-        headers.setContentDispositionFormData(nakno, nakno);
-        headers.setContentType(MediaType.APPLICATION_PDF);
-        return ResponseEntity.ok().headers(headers).body(pdf);
-    }
-    @SneakyThrows
-    private JasperPrint generateReport(Invoice invoice, List<SaleEvent> list, String reportName) {
-        Map<String, Object> parameters = new HashMap<>();
-
-//        File file = ResourceUtils.getFile("classpath:logo.jpg");
-//        parameters.put("logo", file.getPath());  // for developing
-
-        parameters.put("logo", getClass().getResource("logo.jpg").getPath()); //for production
-        parameters.put("customer", invoice.getCustomer().getName());
-        parameters.put("invoiceId",invoice.getId());
-        parameters.put("warehouseMan", invoice.getWarehouseMan());
-        parameters.put("nakNo", invoice.getNakNo());
-        parameters.put("carNumber", invoice.getCarNumber());
-        parameters.put("carNumber2", invoice.getCarNumber2());
-        parameters.put("driverNumber", invoice.getDriverNumber());
-        parameters.put("notes", invoice.getNotes());
-        parameters.put("date", invoice.getDate());
-        parameters.put("description", invoice.getDescription());
-        JasperPrint print = null;
-        try {
-            InputStream inputStream = getClass().getResourceAsStream(reportName);
-
-            JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
-            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
-            print = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-        } catch (Exception e){
-            System.out.println("Reportni ichida xato");
-            e.printStackTrace();
-
-        }
-        return print;
-    }
-
 
     public List<SaleEvent> getAllByInvoiceId(Long id){
         return saleEventRepository.selectGroupByImvoiceID(id);
