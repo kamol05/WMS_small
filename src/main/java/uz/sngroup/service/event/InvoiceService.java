@@ -10,15 +10,19 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
+import uz.sngroup.Application;
 import uz.sngroup.model.event.Invoice;
 import uz.sngroup.model.event.SaleEvent;
 import uz.sngroup.repository.bys.CustomerRepository;
 import uz.sngroup.repository.event.InvoiceRepository;
 import uz.sngroup.repository.event.SaleEventRepository;
 import uz.sngroup.service.Util;
+import uz.sngroup.service.report.ReportGenerator;
 
 import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 @Service
@@ -26,12 +30,33 @@ import java.util.*;
 public class InvoiceService {
     @Autowired InvoiceRepository invoiceRepository;
     @Autowired SaleEventRepository saleEventRepository;
+    @Autowired ReportGenerator reportGenerator;
     @Autowired Util util;
+
+    public ResponseEntity<byte[]> getNewReport(Long invoiceId){
+        String frxmlFileName = "report" + 1;
+        Invoice invoice = invoiceRepository.getById(invoiceId);
+        List<SaleEvent> saleEventList = saleEventRepository.getByInvoice_Id(invoice.getId());
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("logo", util.getFileFromFolder("logo.jpg","data").getPath());
+        parameters.put("customer", invoice.getCustomer().getName());
+        parameters.put("invoiceId",invoice.getId());
+        parameters.put("warehouseMan", invoice.getWarehouseMan());
+        parameters.put("nakNo", invoice.getNakNo());
+        parameters.put("carNumber", invoice.getCarNumber());
+        parameters.put("carNumber2", invoice.getCarNumber2());
+        parameters.put("driverNumber", invoice.getDriverNumber());
+        parameters.put("notes", invoice.getNotes());
+        parameters.put("date", invoice.getDate());
+        parameters.put("description", invoice.getDescription());
+        return reportGenerator.getReport(saleEventList, parameters, frxmlFileName, invoice.getNakNo());
+    }
 
     public ResponseEntity<byte[]> getReport(Long id, int i) throws JRException {
         String reportName = "report" + i + ".jrxml";
         Invoice invoice = invoiceRepository.getById(id);
         List<SaleEvent> saleEventList = saleEventRepository.getByInvoice_Id(invoice.getId());
+
         JasperPrint print = generateReport(invoice, saleEventList, reportName);
         byte[] pdf = JasperExportManager.exportReportToPdf(print);
         HttpHeaders headers = new HttpHeaders();
@@ -41,16 +66,6 @@ public class InvoiceService {
         headers.setContentType(MediaType.APPLICATION_PDF);
         return ResponseEntity.ok().headers(headers).body(pdf);
     }
-
-    void set(){
-        SaleEvent saleEvent = new SaleEvent();
-        saleEvent.getProduct().getName();
-        saleEvent.getProduct().getGramm().getWeight();
-        saleEvent.getProduct().getColor().getName();
-        // $F{student}.getStudentName()
-        //
-    }
-
     @SneakyThrows
     private JasperPrint generateReport(Invoice invoice, List<SaleEvent> list, String reportName) {
         Map<String, Object> parameters = new HashMap<>();
@@ -83,6 +98,7 @@ public class InvoiceService {
         }
         return print;
     }
+
 
     public List<SaleEvent> getAllByInvoiceId(Long id){
         return saleEventRepository.selectGroupByImvoiceID(id);

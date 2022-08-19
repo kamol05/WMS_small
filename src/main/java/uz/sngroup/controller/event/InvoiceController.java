@@ -24,7 +24,7 @@ public class InvoiceController {
 
     @GetMapping(value = "/p/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<byte[]> printReport(@PathVariable Long id) throws IOException, JRException {
-        return invoiceService.getReport(id, 1);
+        return invoiceService.getNewReport(id);
     }
 
     @GetMapping
