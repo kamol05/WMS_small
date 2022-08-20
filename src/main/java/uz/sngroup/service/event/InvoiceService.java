@@ -1,29 +1,19 @@
 package uz.sngroup.service.event;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
-import uz.sngroup.Application;
 import uz.sngroup.model.event.Invoice;
 import uz.sngroup.model.event.SaleEvent;
-import uz.sngroup.repository.bys.CustomerRepository;
 import uz.sngroup.repository.event.InvoiceRepository;
 import uz.sngroup.repository.event.SaleEventRepository;
 import uz.sngroup.service.Util;
 import uz.sngroup.service.report.ReportGenerator;
-
-import java.io.File;
-import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -38,7 +28,7 @@ public class InvoiceService {
         Invoice invoice = invoiceRepository.getById(invoiceId);
         List<SaleEvent> saleEventList = saleEventRepository.getByInvoice_Id(invoice.getId());
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("logo", util.getFileFromFolder("logo.jpg","data").getPath());
+        parameters.put("logo", util.getBufferedImageFromFolder("logo.jpg","data"));
         parameters.put("customer", invoice.getCustomer().getName());
         parameters.put("invoiceId",invoice.getId());
         parameters.put("warehouseMan", invoice.getWarehouseMan());
@@ -55,7 +45,6 @@ public class InvoiceService {
     public List<SaleEvent> getAllByInvoiceId(Long id){
         return saleEventRepository.selectGroupByImvoiceID(id);
     }
-
 
     public String save(Invoice invoice) {
         try{
