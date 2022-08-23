@@ -10,6 +10,6 @@ public class MainController {
 
     @GetMapping
     public String getMain(){
-        return "models/index";
+        return "main/index";
     }
 }

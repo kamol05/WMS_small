@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <title>Xatolik!!!</title>
+    <th:block th:insert="parts/webjars :: webjars"></th:block>
+    <th:block th:insert="parts/static :: static"></th:block>
+</head>
+
+<body>
+<th:block th:insert="parts/header :: header"></th:block>
+
+<main class="main" id="main" style="margin-top: 150px">
+    <div th:text="${m}"></div>
+    <div th:text="${m1}"></div>
+    <div th:text="${m2}"></div>
+
+</main>
+
+</body>
+
+
+<script type="text/javascript">
+</script>
+
+</html>

@@ -34,4 +34,10 @@ public class StockReportController {
     public ResponseEntity<byte[]> getStockPdfReport(){
         return stockService.getStockPdfReport();
     }
+
+    @GetMapping("/p")
+    public String getForm2(Model model){
+        model.addAttribute("events", stockService.getGroupByProductId());
+        return "report/stockprint";
+    }
 }

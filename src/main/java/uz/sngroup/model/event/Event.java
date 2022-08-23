@@ -25,7 +25,7 @@ public class Event {
 
     private Integer serial;
 
-    private Integer ean;
+    private String ean;
 
     private Integer width;
 

@@ -8,6 +8,7 @@ import uz.sngroup.model.event.Counter;
 import uz.sngroup.repository.bys.ProductRepository;
 import uz.sngroup.repository.event.CounterRepository;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +23,11 @@ public class ProductService {
 
     public Product create(Product product) {
         Counter counter = counterRepository.getById(1L);
-        counter.setEan(counter.getEan() + 1);
-        product.setEan(counter.getEan());
+        BigInteger big = BigInteger.valueOf(Long.parseLong(counter.getEan()));
+//        counter.setEan(counter.getEan() + 1);
+//        product.setEan(counter.getEan());
+        counter.setEan(String.valueOf(big.add(BigInteger.ONE)));
+        product.setEan(String.valueOf(big));
         counterRepository.save(counter);
         productRepository.save(product);
         return product;

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -31,12 +32,16 @@ public class Product {
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_gramm"))
     private Gramm gramm;
 
-    private Integer ean;
+    @Size(min = 1,max = 40,message = "max value 40")
+    private String ean;
 
+    @Size(min = 1,max = 40,message = "max value 40")
     private String name;
 
+    @Size(min = 1,max = 40,message = "max value 40")
     private String description = " ";
 
+    @Size(min = 1,max = 40,message = "max value 40")
     private String notes = " ";
 
 

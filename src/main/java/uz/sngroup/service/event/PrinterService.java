@@ -40,7 +40,7 @@ public class PrinterService {
         String weight = String.valueOf(event.getWeight());
         String size = event.getWidth() + " X " + event.getHeight();
         String serial = String.valueOf(event.getSerial());
-        String ean = String.valueOf(event.getEan());
+        String ean = event.getEan();
         String date = formattedDate(event.getDate());
         String str =
                 "^XA\n" +
