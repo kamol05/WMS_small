@@ -26,7 +26,7 @@ public class PivotController {
 
     @GetMapping
     public String getForm(Model model){
-        System.out.println("ggg");
+//        model.addAttribute("events", stockService.findAll());
         model.addAttribute("events", stockService.getGroupByProductId());
         return "pivot/pivot";
     }

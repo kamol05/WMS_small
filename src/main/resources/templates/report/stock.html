@@ -43,10 +43,14 @@
                                     <td th:text="${event.getProduct().getName()}"></td>
                                     <td th:text="${event.getProduct().getColor().getName()}"></td>
                                     <td th:text="${event.getProduct().getGramm().getWeight()}"></td>
-                                    <td th:text="${#numbers.formatDecimal(event.getM2(), 0, 2)}"></td>
-                                    <td th:text="${event.getWeight()}"></td>
-                                    <td th:text="${event.getPieces()}"></td>
-                                    <td th:text="${event.getCount()}"></td>
+<!--                                    <td th:text="${#numbers.formatDecimal(event.getM2(), 0, 2)}"></td>-->
+                                    <td th:text="${#numbers.formatDecimal(event.getM2(), 1,'COMMA', 2, 'POINT')}" ></td>
+                                    <td th:text="${#numbers.formatDecimal(event.getWeight(), 0,'COMMA', 0, 'POINT')}" ></td>
+                                    <td th:text="${#numbers.formatDecimal(event.getPieces(), 0,'COMMA', 0, 'POINT')}" ></td>
+                                    <td th:text="${#numbers.formatDecimal(event.getCount(), 0,'COMMA', 0, 'POINT')}" ></td>
+<!--                                    <td th:text="${event.getWeight()}"></td>-->
+<!--                                    <td th:text="${event.getPieces()}"></td>-->
+<!--                                    <td th:text="${event.getCount()}"></td>-->
                                     <td ><a class="btn btn-outline-success" th:href="@{'/stock/' + ${event.getId()}}">DONALAB</a></td>
                                 </tr>
                             </th:block>

@@ -7,80 +7,87 @@
 </head>
 <body>
 <style th:inline="css">
-  .sii{
-    padding-left: 15px;
-    padding-right: 5px;
-    border: 1px solid;
-  }
+
 </style>
-
-
 <main class="main" >
-  <table class="" style="margin-left: 80px; border: 1px; " id="tab">
+  <table class="" style="margin-left: 80px; border: 1px; " id="table">
         <thead>
         <h6 class="" style="margin-left: 80px">MAVJUD YUKLAR RO'YHATI</h6>
         <tr>
-          <th class="sii" >ID:</th>
-          <th class="sii" >MAHSULOT NOMI</th>
-          <th class="sii" >RANG/MM</th>
-          <th class="sii" >GRAMM</th>
-          <th class="sii" >M2</th>
-          <th class="sii" >OG'IRLIK/...</th>
-          <th class="sii" >DONASI</th>
-          <th class="sii" >PACHKA/RULON</th>
+          <th class="head" >ID:</th>
+          <th class="head" >MAHSULOT NOMI</th>
+          <th class="head" >RANG/MM</th>
+          <th class="head" >GRAMM</th>
+          <th class="head" >M2</th>
+          <th class="head" >OG'IRLIK/...</th>
+          <th class="head" >DONASI</th>
+          <th class="head" >PACHKA/RULON</th>
         </tr>
         </thead>
         <tbody>
         <th:block th:each="event : ${events}" >
-          <tr>
-            <td class="sii" th:text="${event.getId()}"></td>
-            <td class="sii" th:text="${event.getProduct().getName()}"></td>
-            <td class="sii" th:text="${event.getProduct().getColor().getName()}"></td>
-            <td class="sii" th:text="${event.getProduct().getGramm().getWeight()}"></td>
-            <td id="m2" class="sii" th:text="${#numbers.formatDecimal(event.getM2(), 0, 2)}" ></td>
-            <td id="weight" class="sii" th:text="${event.getWeight()}"></td>
-            <td id="piece" class="sii" th:text="${event.getPieces()}"></td>
-            <td id="count" class="sii" th:text="${event.getCount()}"></td>
-          </tr>
+            <tr>
+                <td class="sum1" th:text="${event.getId()}"></td>
+                <td class="sum1" th:text="${event.getProduct().getName()}"></td>
+                <td class="sum1" th:text="${event.getProduct().getColor().getName()}"></td>
+                <td class="sum1" th:text="${event.getProduct().getGramm().getWeight()}"></td>
+                <td id="m2" class="sum2" th:text="${#numbers.formatDecimal(event.getM2(), 1,'COMMA', 2, 'POINT')}" th:value="${event.getM2()}"></td>
+                <td class="sum2" th:text="${#numbers.formatDecimal(event.getWeight(), 0,'COMMA', 0, 'POINT')}" ></td>
+                <td class="sum2" th:text="${#numbers.formatDecimal(event.getPieces(), 0,'COMMA', 0, 'POINT')}" ></td>
+                <td class="sum2" th:text="${#numbers.formatDecimal(event.getCount(), 0,'COMMA', 0, 'POINT')}" ></td>
+            </tr>
         </th:block>
 
   </table>
-  <script type="text/javascript">
-    $(function() {
-      $("#subtotal").html(sumColumn(4));
-      $("#total").html(sumColumn(5));
+    <script type="text/javascript">
+      $(document).ready(function() {
+          var m2 = sumColumnF(5);
+          var weight = sumColumn(6);
+          var piece = sumColumn(7);
+          var count = sumColumn(8);
+          addSummToTableFunction(m2,weight,piece,count);
     });
+    function addSummToTableFunction(m2,weight,piece,count) {
+        function numberWithCommas(x) {return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
 
-    function sumColumn(index) {
-      var total = 0;
-      $("td:nth-child(" + index + ")").each(function() {
-        total += parseInt($(this).text(), 10) || 0;
-      });
-      return total;
+        var table = document.getElementById("table");
+        var row = table.insertRow(-1);
+
+        var cell0 = row.insertCell(0);
+        cell0.className = 'sum1';
+        cell0.innerHTML = "SUMM :";
+        cell0.colSpan = 4;
+        cell0.style = 'text-align: center'
+
+        var cell1 = row.insertCell(1);
+        var cell2 = row.insertCell(2);
+        var cell3 = row.insertCell(3);
+        var cell4 = row.insertCell(4);
+
+        cell1.className = 'sum2';
+        cell2.className = 'sum2';
+        cell3.className = 'sum2';
+        cell4.className = 'sum2';
+
+        cell1.innerHTML = numberWithCommas(m2);
+        cell2.innerHTML = numberWithCommas(weight);
+        cell3.innerHTML = numberWithCommas(piece);
+        cell4.innerHTML = numberWithCommas(count);
     }
-
-
-    $(document).ready(function() {
-      Sub();
-    });
-    function Sub(){
-      m2=(document.getElementById('m2').value);
-      weight=parseFloat(document.getElementById('weight').value);
-      piece=parseFloat(document.getElementById('piece').value);
-      count=parseFloat(document.getElementById('count').value);
-
-      var newTable = document.getElementById('tab');
-      var row = newTable.insertRow(-1);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(0);
-      var cell3 = row.insertCell(0);
-      var cell4 = row.insertCell(0);
-      cell1.innerHTML = m2;
-      cell4.innerHTML = weight;
-      cell3.innerHTML = piece;
-      cell2.innerHTML = count;
-
-    }
+      function sumColumn(index) {
+          var total = 0;
+          $("td:nth-child(" + index + ")").each(function() {
+              total += parseInt($(this).text(), 10) || 0;
+          });
+          return total;
+      }
+      function sumColumnF(index) {
+          var total = 0;
+          $("td:nth-child(" + index + ")").each(function() {
+              total += parseFloat($(this).attr('value'), 10) || 0;
+          });
+          return total;
+      }
   </script>
 </main>
 </body>

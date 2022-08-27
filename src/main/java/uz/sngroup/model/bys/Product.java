@@ -2,10 +2,12 @@ package uz.sngroup.model.bys;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+
 
 @Entity
 @Getter
@@ -20,14 +22,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonUnwrapped
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_quality"))
     private Quality quality;
 
+    @JsonUnwrapped
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_color"))
     private Color color;
 
+    @JsonUnwrapped
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_gramm"))
     private Gramm gramm;

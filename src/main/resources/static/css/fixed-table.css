@@ -30,3 +30,21 @@
     width: 100%;
     height: 100%;
 }
+
+.sum1{
+    padding-left: 15px;
+    padding-right: 5px;
+    border: 1px solid;
+}
+.sum2{
+    padding-left: 15px;
+    padding-right: 5px;
+    border: 1px solid;
+    text-align: right;
+}
+.head{
+    padding-left: 15px;
+    padding-right: 5px;
+    border: 1px solid;
+    font-size: 12px;
+}
