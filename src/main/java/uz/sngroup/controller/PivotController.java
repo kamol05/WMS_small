@@ -26,8 +26,13 @@ public class PivotController {
 
     @GetMapping
     public String getForm(Model model){
-//        model.addAttribute("events", stockService.findAll());
-        model.addAttribute("events", stockService.getGroupByProductId());
+        model.addAttribute("events", stockService.findAllInStock());
+        return "pivot/pivot";
+    }
+
+    @GetMapping("/all")
+    public String getForm2(Model model){
+        model.addAttribute("events", stockService.findAll());
         return "pivot/pivot";
     }
 }

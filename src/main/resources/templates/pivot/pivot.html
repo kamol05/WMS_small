@@ -25,17 +25,19 @@
     var events = /*[[${events}]]*/ 'default';
     /*]]>*/
 
-    $(function(){
+    $(function() {
+      pivotMy(events);
+    });
+
+    function pivotMy(jsonArray){
       var renderers = $.extend(
               $.pivotUtilities.renderers,
               $.pivotUtilities.c3_renderers,
               $.pivotUtilities.d3_renderers,
               $.pivotUtilities.export_renderers
       );
-      // $("#output").pivotUI(events, renderers);
-      $("#output").pivotUI(events, {hiddenAttributes: [""], renderers: renderers , locales: ["ru"]}, true);
-    });
-
+      $("#output").pivotUI(jsonArray, {hiddenAttributes: [""], renderers: renderers, locales: ["ru"]}, true);
+    }
     function readText(filePath) {
       var reader = new FileReader();
       var output = "";
@@ -61,7 +63,7 @@
     }
   </script>
 </head>
-<body>
+<body style="background-color: #3D3D3D">
 <div style="margin-left: 30px;">
   <form action="/">
     <input type="submit" value="Main Menu" style="font-size: 20px;"/>

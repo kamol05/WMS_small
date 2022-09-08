@@ -1,22 +1,11 @@
 package uz.sngroup.exception;
 
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.servlet.NoHandlerFoundException;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-
 
 
 @ControllerAdvice

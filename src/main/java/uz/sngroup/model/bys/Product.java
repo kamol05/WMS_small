@@ -41,9 +41,6 @@ public class Product {
     private String ean;
 
     @Size(min = 1,max = 40,message = "max value 40")
-    private String name;
-
-    @Size(min = 1,max = 40,message = "max value 40")
     private String description = " ";
 
     @Size(min = 1,max = 40,message = "max value 40")

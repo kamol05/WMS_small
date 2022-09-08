@@ -54,6 +54,9 @@ public class StockService {
 
     @Autowired private EventRepository eventRepository;
 
+    public List<Event> findAllInStock() {
+        return eventRepository.findAllInStock();
+    }
     public List<Event> findAll() {
         return eventRepository.findAll();
     }
