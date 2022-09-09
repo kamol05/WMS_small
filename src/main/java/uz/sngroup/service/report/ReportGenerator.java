@@ -40,7 +40,7 @@ public class ReportGenerator {
     private byte[] generateReport(List<?> collectionDataSource, Map<String, Object> parameters, String frxmlFileName) {
         byte[] arrayOfBytes = null;
         try {
-            InputStream inputStream = new FileInputStream(util.getFileFromFolder(frxmlFileName,"data"));
+            InputStream inputStream = new FileInputStream(util.getFileFromRecFolder(frxmlFileName,"data"));
             JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(collectionDataSource);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);

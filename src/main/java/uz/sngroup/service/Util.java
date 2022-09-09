@@ -46,6 +46,16 @@ public class Util {
         return new File(path + "\\" + folderName + "\\" + fileName);
     }
 
+    public File getFileFromRecFolder(String fileName, String folderName){
+        Path path = null;
+        try {
+            path = Paths.get(Application.class.getProtectionDomain().getCodeSource().getLocation().toURI()).toAbsolutePath();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return new File(path + "\\" + folderName + "\\" + fileName);
+    }
+
     public BufferedImage getBufferedImageFromFolder(String imageName, String folderName) {
         try {
             return ImageIO.read(getFileFromFolder(imageName, folderName));
