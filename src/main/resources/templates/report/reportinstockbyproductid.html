@@ -37,7 +37,7 @@
         <th:block th:each="event : ${events}" >
           <tr>
             <td th:text="${event.getId()}"></td>
-            <td th:text="${event.getProduct().getName()}"></td>
+            <td th:text="${event.getProduct().getQuality().getName()}"></td>
             <td th:text="${event.getProduct().getColor().getName()}"></td>
             <td th:text="${event.getProduct().getGramm().getWeight()}"></td>
             <td th:text="${event.getWidth() + ' X ' + event.getHeight()}"></td>

@@ -64,7 +64,7 @@ public class BarcodeService {
         product.setColor(findColor(b.getColor()));
         product.setGramm(findGramm(b.getGramm()));
         product.setQuality(findQuality(b.getQuality()));
-        product.setName(product.getQuality().getName());
+//        product.setName(product.getQuality().getName());
         product = productService.create(product);
         return product;
 

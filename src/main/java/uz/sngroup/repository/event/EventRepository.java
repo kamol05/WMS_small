@@ -50,4 +50,13 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     Optional<Event> getBySerialAndEventTypeNot(Integer serial, EventType type);
     Integer getTopByOrderBySerial();
     Optional<Event> getBySerialAndEventTypeNotIn(Integer serial, List<EventType> type);
+
+    @Query(value = "select * " +
+            "from events " +
+            "where event_type = 'IN' and serial not in " +
+            "(" +
+            "select serial from events where event_type = 'SALE'" +
+            ")",
+            nativeQuery = true)
+    List<Event> findAllInStock();
 }

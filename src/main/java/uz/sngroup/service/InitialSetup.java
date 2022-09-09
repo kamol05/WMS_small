@@ -46,7 +46,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
     public void addCounter(){
         Counter counter = new Counter();
         counter.setSerial(100000);
-        counter.setEan(47000000);
+        counter.setEan("47000000");
         counterRepository.save(counter);
     }
     public void addUsers() {

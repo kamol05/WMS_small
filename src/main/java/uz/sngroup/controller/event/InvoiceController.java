@@ -1,5 +1,4 @@
 package uz.sngroup.controller.event;
-import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import uz.sngroup.model.event.Invoice;
 import uz.sngroup.service.bys.CustomerService;
 import uz.sngroup.service.event.InvoiceService;
 
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/invoice")
@@ -23,8 +21,8 @@ public class InvoiceController {
     @Autowired CustomerService customerService;
 
     @GetMapping(value = "/p/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<byte[]> printReport(@PathVariable Long id) throws IOException, JRException {
-        return invoiceService.getReport(id, 1);
+    public ResponseEntity<byte[]> printReport(@PathVariable Long id){
+        return invoiceService.getReport(id);
     }
 
     @GetMapping

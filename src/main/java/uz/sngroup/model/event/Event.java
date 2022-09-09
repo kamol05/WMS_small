@@ -1,15 +1,19 @@
 package uz.sngroup.model.event;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
+import uz.sngroup.model.EventSerializer;
 import uz.sngroup.model.bys.Product;
 import uz.sngroup.model.sys.User;
 import javax.persistence.*;
 import java.util.Date;
 
+@JsonSerialize(using = EventSerializer.class)
 @Entity
 @Getter
 @Setter
@@ -25,7 +29,7 @@ public class Event {
 
     private Integer serial;
 
-    private Integer ean;
+    private String ean;
 
     private Integer width;
 
@@ -47,11 +51,13 @@ public class Event {
     private EventType eventType;
 
 
+    @JsonUnwrapped
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_product"))
     private Product product;
 
 
+    @JsonUnwrapped
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_user"))
     private User user;

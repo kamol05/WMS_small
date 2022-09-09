@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+
+<head>
+<!--  <th:block th:insert="parts/webjars :: webjars"></th:block>-->
+  <script type="text/javascript" th:src="@{/jq/jquery.min.js}" ></script>
+  <script type="text/javascript" th:src="@{/jq/jquery-ui.min.js}" ></script>
+  <script type="text/javascript" th:src="@{/jq/jquery.ui.touch-punch.min.js}" ></script>
+  <script type="text/javascript" th:src="@{/jq/d3.min.js}" ></script>
+  <script type="text/javascript" th:src="@{/jq/c3.min.js}" ></script>
+  <script type="text/javascript" th:src="@{/jq/chosen.jquery.js}" ></script>
+  <script type="text/javascript" th:src="@{/dist/pivot.js}" ></script>
+  <script type="text/javascript" th:src="@{/dist/d3_renderers.js}" ></script>
+  <script type="text/javascript" th:src="@{/dist/c3_renderers.js}" ></script>
+  <script type="text/javascript" th:src="@{/dist/export_renderers.js}" ></script>
+  <link rel="stylesheet" type="text/css" th:href="@{/dist/pivot.css}" >
+  <link rel="stylesheet" type="text/css" th:href="@{/jq/c3.min.css}" >
+  <link rel="stylesheet" type="text/css" th:href="@{/jq/chosen.min.css}" >
+  <style>
+    body {font-family: Verdana;}
+  </style>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    var events = /*[[${events}]]*/ 'default';
+    /*]]>*/
+
+    $(function() {
+      pivotMy(events);
+    });
+
+    function pivotMy(jsonArray){
+      var renderers = $.extend(
+              $.pivotUtilities.renderers,
+              $.pivotUtilities.c3_renderers,
+              $.pivotUtilities.d3_renderers,
+              $.pivotUtilities.export_renderers
+      );
+      $("#output").pivotUI(jsonArray, {hiddenAttributes: [""], renderers: renderers, locales: ["ru"]}, true);
+    }
+    function readText(filePath) {
+      var reader = new FileReader();
+      var output = "";
+      if(filePath.files && filePath.files[0]) {
+        reader.onload = function (e) {
+          output = e.target.result;
+          $("#output").pivotUI(events, JSON.parse(output), true);
+        };
+        reader.readAsText(filePath.files[0]);
+      }
+    }
+    function saveConfig(){
+      var config = $("#output").data("pivotUIOptions");
+      var config_copy = JSON.parse(JSON.stringify(config));
+      delete config_copy["aggregators"];
+      delete config_copy["renderers"];
+      var txt = JSON.stringify(config_copy);
+      var a = document.createElement("a");
+      var file = new Blob([txt], {type: 'text/plain'});
+      a.href = URL.createObjectURL(file);
+      a.download = 'config.txt';
+      a.click();
+    }
+  </script>
+</head>
+<body style="background-color: #3D3D3D">
+<div style="margin-left: 30px;">
+  <form action="/">
+    <input type="submit" value="Main Menu" style="font-size: 20px;"/>
+    <input type="button" onclick="saveConfig()" value="Save Config" id="save" style="font-size: 20px;" />
+    <input type="file"   onchange="readText(this)" value="Restore Config" id="restore" style="font-size: 20px;" />
+  </form>
+</div>
+<div style="margin: 30px;">
+  <div id="output"></div>
+</div>
+
+
+</body>
+
+
+</html>

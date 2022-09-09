@@ -1,6 +1,8 @@
 package uz.sngroup.controller.report;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,5 +28,16 @@ public class StockReportController {
     public String getAllByProductId(@PathVariable Long id, Model model){
         model.addAttribute("events", stockService.getAllByProductId(id));
         return "report/reportinstockbyproductid";
+    }
+
+    @GetMapping(value = "/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<byte[]> getStockPdfReport(){
+        return stockService.getStockPdfReport();
+    }
+
+    @GetMapping("/p")
+    public String getForm2(Model model){
+        model.addAttribute("events", stockService.getGroupByProductId());
+        return "report/stockprint";
     }
 }

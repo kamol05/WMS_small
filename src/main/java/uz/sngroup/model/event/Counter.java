@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.math.BigInteger;
 
 @Entity
 @Getter
@@ -16,7 +18,7 @@ public class Counter {
 
     private Integer serial;
 
-    private Integer ean;
+    private String ean;
 
 }
 

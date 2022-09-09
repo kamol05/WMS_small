@@ -36,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/terminal/**",
             "/webjars/**",
             "/sound/**",
+            "/dist/**",
+            "/jq/**",
             "/js/**",
             "/css/**",
             "/vendor/**"
@@ -73,7 +75,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login");
 
     }
-
     @Bean
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();

@@ -24,7 +24,7 @@ public class SaleEvent {
 
     private Integer serial;
 
-    private Integer ean;
+    private String ean;
 
     private Integer width;
 

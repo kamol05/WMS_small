@@ -8,7 +8,17 @@ import uz.sngroup.model.event.EventType;
 import uz.sngroup.model.event.SaleEvent;
 import uz.sngroup.repository.event.EventRepository;
 import uz.sngroup.repository.event.SaleEventRepository;
+import uz.sngroup.service.Util;
+
 import static org.assertj.core.api.Assertions.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 @SpringBootTest()
@@ -16,7 +26,19 @@ class DemoApplicationTests {
     @Autowired
     EventRepository eventRepository;
     @Autowired
+    Util util;
+    @Autowired
     SaleEventRepository saleEventRepository;
+
+    @Test
+    void testpath() throws FileNotFoundException, URISyntaxException {
+
+        System.out.println(util.getFileFromFolder("logo.jpg","data").getPath());
+        Path path = Paths.get(Application.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent().getParent();
+        File initialFile = new File(path + "\\data\\" + "report1.jrxml");
+        InputStream targetStream = new FileInputStream(initialFile);
+        System.out.println(initialFile.getAbsolutePath());
+    }
 
     @Test
     void getallbyproductid(){

@@ -23,7 +23,7 @@
         <tbody>
         <th:block th:each="event : ${saleevents}" >
           <tr>
-            <td th:text="${event.getProduct().getName()}"></td>
+            <td th:text="${event.getProduct().getQuality().getName()}"></td>
             <td th:text="${event.getPieces()}"></td>
             <td th:text="${event.getCount()}"></td>
             <td th:text="${event.getProduct().getColor().getName()}"></td>

@@ -33,14 +33,14 @@ public class PrinterService {
     }
 
     private String getWord(Event event){
-        String quality = event.getProduct().getName();
+        String quality = event.getProduct().getQuality().getName();
         String gramm = event.getProduct().getGramm().getWeight();
         String color = event.getProduct().getColor().getName();
         String pieces = String.valueOf(event.getPieces());
         String weight = String.valueOf(event.getWeight());
         String size = event.getWidth() + " X " + event.getHeight();
         String serial = String.valueOf(event.getSerial());
-        String ean = String.valueOf(event.getEan());
+        String ean = event.getEan();
         String date = formattedDate(event.getDate());
         String str =
                 "^XA\n" +

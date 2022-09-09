@@ -2,7 +2,6 @@
     <header id="header" class="header fixed-top d-flex align-items-center bg-dark">
         <div class="d-flex">
             <a href="/" class="d-flex align-items-center">
-                <img src="/logo.jpg"  alt="">
                 <span class="d-none d-lg-block text-light m-2 card-text" style="font-size: 22px; width: 150px; ">SN-GROUP-3</span>
             </a>
         </div>
@@ -36,10 +35,8 @@
                 Hisobotlar
             </button>
             <div class="dropdown-menu menu-2 mt-5">
-                <a class="dropdown-item" href="#">Kunlik</a>
-                <a class="dropdown-item" href="#">Oylik</a>
-                <a class="dropdown-item" href="#">Yillik</a>
-                <a class="dropdown-item" href="#"></a>
+                <a class="dropdown-item" th:href="@{/pivot}">Sotilgan</a>
+                <a class="dropdown-item" th:href="@{/pivot/all}">Umumiy</a>
             </div>
         </div>
 
