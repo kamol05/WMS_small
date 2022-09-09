@@ -1,18 +1,21 @@
 package uz.sngroup.model.event;
 
-import jdk.jfr.Timestamp;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
-import uz.sngroup.model.event.Invoice;
+import uz.sngroup.model.SaleEventSerializer;
 import uz.sngroup.model.bys.Customer;
 import uz.sngroup.model.bys.Product;
 import uz.sngroup.model.sys.User;
+
 import javax.persistence.*;
 import java.util.Date;
 
+
+@JsonSerialize(using = SaleEventSerializer.class)
 @Entity
 @Getter
 @Setter

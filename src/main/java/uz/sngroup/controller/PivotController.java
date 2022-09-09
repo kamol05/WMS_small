@@ -24,7 +24,7 @@ public class PivotController {
         return "redirect:/";
     }
 
-    @GetMapping
+    @GetMapping("/instock")
     public String getForm(Model model){
         model.addAttribute("events", stockService.findAllInStock());
         return "pivot/pivot";
@@ -33,6 +33,12 @@ public class PivotController {
     @GetMapping("/all")
     public String getForm2(Model model){
         model.addAttribute("events", stockService.findAll());
+        return "pivot/pivot";
+    }
+
+    @GetMapping("/sold")
+    public String getForm3(Model model){
+        model.addAttribute("events", stockService.findAllSelled());
         return "pivot/pivot";
     }
 }

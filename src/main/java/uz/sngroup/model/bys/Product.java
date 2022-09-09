@@ -23,17 +23,17 @@ public class Product {
     private Long id;
 
     @JsonUnwrapped
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_quality"))
     private Quality quality;
 
     @JsonUnwrapped
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_color"))
     private Color color;
 
     @JsonUnwrapped
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_gramm"))
     private Gramm gramm;
 
