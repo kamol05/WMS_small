@@ -90,7 +90,7 @@
         <variableExpression><![CDATA[$F{weight}]]></variableExpression>
     </variable>
     <variable name="name1" class="java.lang.Integer" resetType="Group" resetGroup="eni + buyi" calculation="Count">
-        <variableExpression><![CDATA[$F{product}.getName()]]></variableExpression>
+        <variableExpression><![CDATA[$F{product}.getQuality().getName()]]></variableExpression>
     </variable>
     <variable name="pieces1" class="java.lang.Integer" resetType="Group" resetGroup="eni + buyi" calculation="Sum">
         <variableExpression><![CDATA[$F{pieces}]]></variableExpression>
@@ -108,10 +108,10 @@
         <variableExpression><![CDATA[$F{pieces}]]></variableExpression>
     </variable>
     <variable name="name2" class="java.lang.Integer" resetType="Group" resetGroup="SUMMA" calculation="Count">
-        <variableExpression><![CDATA[$F{product}.getName()]]></variableExpression>
+        <variableExpression><![CDATA[$F{product}.getQuality().getName()]]></variableExpression>
     </variable>
     <variable name="name3" class="java.lang.Integer" resetType="Group" resetGroup="SIFAT" calculation="Count">
-        <variableExpression><![CDATA[$F{product}.getName()]]></variableExpression>
+        <variableExpression><![CDATA[$F{product}.getQuality().getName()]]></variableExpression>
     </variable>
     <variable name="pieces3" class="java.lang.Integer" resetType="Group" resetGroup="SIFAT" calculation="Sum">
         <variableExpression><![CDATA[$F{pieces}]]></variableExpression>
@@ -280,7 +280,7 @@
         </groupFooter>
     </group>
     <group name="SIFAT">
-        <groupExpression><![CDATA[$F{product}.getName() + $F{product}.getColor().getName()]]></groupExpression>
+        <groupExpression><![CDATA[$F{product}.getQuality().getName() + $F{product}.getColor().getName()]]></groupExpression>
         <groupHeader>
             <band>
                 <property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -509,7 +509,7 @@
                         <font fontName="DejaVu Sans" size="10" isBold="true"/>
                         <paragraph leftIndent="4" rightIndent="4"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$F{product}.getName()]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$F{product}.getQuality().getName()]]></textFieldExpression>
                 </textField>
                 <textField textAdjust="ScaleFont" pattern="#,##0.###;(#,##0.###-)">
                     <reportElement x="363" y="0" width="50" height="20" uuid="014337d3-8692-4e48-b0ee-940614c9cbe8">
