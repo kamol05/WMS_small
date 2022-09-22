@@ -1,6 +1,7 @@
 package uz.sngroup.service.report;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,11 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class ReportGenerator {
     @Autowired Util util;
@@ -46,8 +49,8 @@ public class ReportGenerator {
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
             arrayOfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
         } catch (JRException e){
-            System.out.println("Reportni ichida xato");
-            e.printStackTrace();
+            log.error("Reportni ichida xato");
+            log.error(Arrays.toString(e.getStackTrace()));
         }
         return arrayOfBytes;
     }

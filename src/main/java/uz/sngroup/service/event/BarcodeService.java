@@ -12,6 +12,7 @@ import uz.sngroup.service.bys.*;
 import uz.sngroup.service.bys.ProductService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class BarcodeService {
         try {
             return printMultipleOrSingle(b);
         }catch (Exception e){
-            e.printStackTrace();
+            log.error(Arrays.toString(e.getStackTrace()));
             return "Ichki Xatolik !!!";
         }
     }

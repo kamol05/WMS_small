@@ -15,6 +15,7 @@ import uz.sngroup.service.event.SaleEventService;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ public class TerminalService {
                 return sell(invoice, serial);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            log.error(Arrays.toString(e.getStackTrace()));
             return "Ichki Xatolik";
         }
     }

@@ -1,14 +1,17 @@
 package uz.sngroup.service.event;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import uz.sngroup.model.event.Event;
 import javax.print.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
+@Slf4j
 @Service
 public class PrinterService {
 
@@ -19,7 +22,7 @@ public class PrinterService {
         try {
             if (print){ sendCommand(event); }
         } catch (PrintException e) {
-            e.printStackTrace();
+            log.error(Arrays.toString(e.getStackTrace()));
         }
     }
 

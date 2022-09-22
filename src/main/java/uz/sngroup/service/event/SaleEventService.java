@@ -64,6 +64,7 @@ public class SaleEventService {
             Optional<Event> optionalEvent = eventRepository.getBySerialAndEventType(serial, EventType.SALE);
             if (optionalEvent.isPresent()){
                 deleteAllFromSale(optionalSaleEvent.get().getId(), optionalEvent.get().getId());
+                log.warn(serial + "  O'CHIRILDI");
                 return serial + "  O'CHIRILDI";
             } else return "Xatolik 1";
 

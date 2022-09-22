@@ -40,7 +40,7 @@ public class Util {
         try {
             return ImageIO.read(getFileFromRecFolder(imageName, folderName));
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
