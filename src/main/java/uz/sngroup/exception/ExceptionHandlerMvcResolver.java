@@ -11,17 +11,6 @@ import java.sql.SQLException;
 @ControllerAdvice
 public class ExceptionHandlerMvcResolver {
 
-//    @ExceptionHandler(value = {SQLException.class, IOException.class})
-//    protected String handleConflicts(IOException ex, Model model) {
-////        StringWriter stringWriter = new StringWriter();
-////        PrintWriter printWriter = new PrintWriter(stringWriter);
-////        ex.printStackTrace(printWriter);
-////        String exceptionString = stringWriter.toString();
-////        model.addAttribute("error", exceptionString);
-//        String m2 = ex.getMessage();
-//        model.addAttribute("m2", m2);
-//        return "main/exception";
-//    }
 
     @ExceptionHandler(value = {Error.class})
     protected String handleConflict1(Exception ex, Model model) {
