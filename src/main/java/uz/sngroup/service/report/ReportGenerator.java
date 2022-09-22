@@ -49,8 +49,7 @@ public class ReportGenerator {
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
             arrayOfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
         } catch (JRException e){
-            log.error("Reportni ichida xato");
-            log.error(Arrays.toString(e.getStackTrace()));
+            log.error("Reportni ichida xato", e);
         }
         return arrayOfBytes;
     }

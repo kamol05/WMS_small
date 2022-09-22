@@ -35,7 +35,7 @@ public class TerminalService {
                 return sell(invoice, serial);
             }
         }catch (Exception e){
-            log.error(Arrays.toString(e.getStackTrace()));
+            log.error("->", e);
             return "Ichki Xatolik";
         }
     }

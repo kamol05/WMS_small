@@ -22,7 +22,7 @@ public class PrinterService {
         try {
             if (print){ sendCommand(event); }
         } catch (PrintException e) {
-            log.error(Arrays.toString(e.getStackTrace()));
+            log.error("->", e);
         }
     }
 

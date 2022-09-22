@@ -168,7 +168,7 @@
                     <textElement verticalAlignment="Middle">
                         <paragraph leftIndent="5"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$F{product}.getName()]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$F{product}.getQuality().getName()]]></textFieldExpression>
                 </textField>
                 <textField textAdjust="ScaleFont">
                     <reportElement x="161" y="0" width="60" height="20" uuid="87115a41-6f22-4458-982e-3a7b1698ece8">

@@ -52,7 +52,7 @@ public class InvoiceService {
             invoiceRepository.save(invoice);
             return "Malumot Kiritildi!!!";
         }catch (Exception e){
-            log.error(Arrays.toString(e.getStackTrace()));
+            log.error("->", e);
             return "Xato!!!";
         }
     }

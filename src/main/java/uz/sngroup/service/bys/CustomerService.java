@@ -23,7 +23,7 @@ public class CustomerService {
             customerRepository.save(customer);
             return "Malumot Kiritildi!!!";
         }catch (Exception e){
-            log.error(Arrays.toString(e.getStackTrace()));
+            log.error("->", e);
             return "Xato!!!";
         }
     }

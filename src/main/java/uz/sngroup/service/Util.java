@@ -32,7 +32,6 @@ public class Util {
 
     public File getFileFromRecFolder(String fileName, String folderName){
         File file = new File(System.getProperty("user.dir") + "\\" + folderName + "\\" + fileName);
-        log.error(file.getAbsolutePath());
         return file;
     }
 
@@ -40,7 +39,7 @@ public class Util {
         try {
             return ImageIO.read(getFileFromRecFolder(imageName, folderName));
         } catch (IOException e) {
-            log.error(e.getMessage());
+            log.error("-", e);
             return null;
         }
     }

@@ -26,7 +26,7 @@ public class ColorService {
             barcodeService.updateLists();
             return "Malumot Kiritildi!!!";
         }catch (Exception e){
-            log.error(Arrays.toString(e.getStackTrace()));
+            log.error("->", e);
             return "Xato!!!";
         }
 
