@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <title>SKLAD ASTATKA</title>
+    <title>OMBORDAGI QOLDIQ</title>
     <th:block th:insert="parts/webjars :: webjars"></th:block>
     <th:block th:insert="parts/static :: static"></th:block>
 </head>
@@ -18,10 +18,10 @@
                                 <h4 class="">MAVJUD YUKLAR RO'YHATI</h4>
                             </div>
                             <div class="btn">
-                                <a class="btn btn-danger" th:href="@{/stock/pdf}">PDF Chiqarish</a>
+                                <a class="btn btn-danger" th:href="@{/stock/pdf}">PDF CHIQARISH</a>
                             </div>
                             <div class="btn">
-                                <a class="btn btn-danger" th:href="@{/stock/p}" th:target="_blank">Pechat Berish</a>
+                                <a class="btn btn-danger" th:href="@{/stock/p}" th:target="_blank">QOG'OZDA CHOP ETISH</a>
                             </div>
                             <thead>
                             <tr>
@@ -51,7 +51,7 @@
 <!--                                    <td th:text="${event.getWeight()}"></td>-->
 <!--                                    <td th:text="${event.getPieces()}"></td>-->
 <!--                                    <td th:text="${event.getCount()}"></td>-->
-                                    <td ><a class="btn btn-outline-success" th:href="@{'/stock/' + ${event.getId()}}">DONALAB</a></td>
+                                    <td ><a class="btn btn-outline-success" th:href="@{'/stock/' + ${event.getId()}}">DONALAB KO'RISH</a></td>
                                 </tr>
                             </th:block>
 
