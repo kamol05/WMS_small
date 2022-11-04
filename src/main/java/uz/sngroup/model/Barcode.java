@@ -29,7 +29,7 @@ public class Barcode{
 
     @Max(value = 1000,message = "max value 1000")
     @Min(value = 0,message = "min value 0")
-    private Integer weight;
+    private Double weight;
 
     @Max(value = 100_000,message = "max value 100_00")
     @Min(value = 0,message = "min value 0")

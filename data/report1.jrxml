@@ -26,6 +26,7 @@
     <parameter name="date" class="java.util.Date"/>
     <parameter name="description" class="java.lang.String"/>
     <parameter name="carNumber2" class="java.lang.String"/>
+
     <parameter name="logo" class="java.lang.Object" isForPrompting="false">
         <parameterDescription><![CDATA[The letterhead image]]></parameterDescription>
         <defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -51,7 +52,7 @@
         <property name="com.jaspersoft.studio.field.label" value="m2"/>
         <property name="com.jaspersoft.studio.field.tree.path" value="saleevents"/>
     </field>
-    <field name="weight" class="java.lang.Integer">
+    <field name="weight" class="java.lang.Double">
         <property name="com.jaspersoft.studio.field.name" value="weight"/>
         <property name="com.jaspersoft.studio.field.label" value="weight"/>
         <property name="com.jaspersoft.studio.field.tree.path" value="saleevents"/>
@@ -74,7 +75,6 @@
 
     <sortField name="width"/>
     <sortField name="color" type="Variable"/>
-
     <variable name="color" class="java.lang.String">
         <variableExpression><![CDATA[$F{product}.getColor().getName()]]></variableExpression>
     </variable>
@@ -86,7 +86,7 @@
     <variable name="m21" class="java.lang.Double" resetType="Group" resetGroup="eni + buyi" calculation="Sum">
         <variableExpression><![CDATA[$F{m2}]]></variableExpression>
     </variable>
-    <variable name="weight1" class="java.lang.Integer" resetType="Group" resetGroup="eni + buyi" calculation="Sum">
+    <variable name="weight1" class="java.lang.Double" resetType="Group" resetGroup="eni + buyi" calculation="Sum">
         <variableExpression><![CDATA[$F{weight}]]></variableExpression>
     </variable>
     <variable name="name1" class="java.lang.Integer" resetType="Group" resetGroup="eni + buyi" calculation="Count">
@@ -101,7 +101,7 @@
     <variable name="height2" class="java.lang.Integer" resetType="Group" resetGroup="SUMMA" calculation="Sum">
         <variableExpression><![CDATA[$F{height}]]></variableExpression>
     </variable>
-    <variable name="weight2" class="java.lang.Integer" resetType="Group" resetGroup="SUMMA" calculation="Sum">
+    <variable name="weight2" class="java.lang.Double" resetType="Group" resetGroup="SUMMA" calculation="Sum">
         <variableExpression><![CDATA[$F{weight}]]></variableExpression>
     </variable>
     <variable name="pieces2" class="java.lang.Integer" resetType="Group" resetGroup="SUMMA" calculation="Sum">
@@ -116,7 +116,7 @@
     <variable name="pieces3" class="java.lang.Integer" resetType="Group" resetGroup="SIFAT" calculation="Sum">
         <variableExpression><![CDATA[$F{pieces}]]></variableExpression>
     </variable>
-    <variable name="weight3" class="java.lang.Integer" resetType="Group" resetGroup="SIFAT" calculation="Sum">
+    <variable name="weight3" class="java.lang.Double" resetType="Group" resetGroup="SIFAT" calculation="Sum">
         <variableExpression><![CDATA[$F{weight}]]></variableExpression>
     </variable>
     <variable name="m22" class="java.lang.Double" resetType="Group" resetGroup="SIFAT" calculation="Sum">
@@ -172,7 +172,7 @@
                     </textElement>
                     <textFieldExpression><![CDATA[$V{pieces2}]]></textFieldExpression>
                 </textField>
-                <textField textAdjust="ScaleFont">
+                <textField textAdjust="ScaleFont" pattern="#,##0.###;(#,##0.###-)">
                     <reportElement x="413" y="32" width="50" height="20" uuid="ca4f967e-474b-492c-b45a-c6fa090fdf21">
                         <property name="com.jaspersoft.studio.unit.width" value="px"/>
                         <property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
@@ -327,7 +327,7 @@
                     </textElement>
                     <textFieldExpression><![CDATA[$V{pieces3}]]></textFieldExpression>
                 </textField>
-                <textField textAdjust="ScaleFont">
+                <textField textAdjust="ScaleFont" pattern="#,##0.###;(#,##0.###-)">
                     <reportElement x="413" y="0" width="50" height="20" uuid="e469ab80-e6d8-4638-8800-738944313280">
                         <property name="com.jaspersoft.studio.unit.width" value="px"/>
                         <property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
@@ -530,7 +530,7 @@
                     </textElement>
                     <textFieldExpression><![CDATA[$V{m21}]]></textFieldExpression>
                 </textField>
-                <textField textAdjust="ScaleFont">
+                <textField textAdjust="ScaleFont" pattern="#,##0.###;(#,##0.###-)">
                     <reportElement x="413" y="0" width="50" height="20" uuid="09933661-b17d-4820-b18b-cf95f08e3e58">
                         <property name="com.jaspersoft.studio.unit.width" value="px"/>
                         <property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
@@ -809,7 +809,7 @@
                         <font fontName="DejaVu Sans" size="10" isBold="true"/>
                         <paragraph leftIndent="5"/>
                     </textElement>
-                    <textFieldExpression><![CDATA["НАКЛАДНАЯ:"]]></textFieldExpression>
+                    <textFieldExpression><![CDATA["НАКЛАДНАЯ"]]></textFieldExpression>
                 </textField>
             </frame>
         </band>

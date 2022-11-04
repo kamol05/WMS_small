@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import uz.sngroup.model.event.Event;
 import javax.print.*;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -40,7 +41,7 @@ public class PrinterService {
         String gramm = event.getProduct().getGramm().getWeight();
         String color = event.getProduct().getColor().getName();
         String pieces = String.valueOf(event.getPieces());
-        String weight = String.valueOf(event.getWeight());
+        String weight = new DecimalFormat("#.0#").format(event.getWeight());
         String size = event.getWidth() + " X " + event.getHeight();
         String serial = String.valueOf(event.getSerial());
         String ean = event.getEan();

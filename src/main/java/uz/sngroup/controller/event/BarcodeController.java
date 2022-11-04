@@ -19,8 +19,7 @@ import java.util.List;
 @RequestMapping("/barcode")
 public class BarcodeController {
     @Autowired BarcodeService barcodeService;
-    @Autowired
-    EventService eventService;
+    @Autowired EventService eventService;
 
     @GetMapping
     public String getForm(Model model){

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>BRKOD BOSISH</title>
   <div th:insert="parts/webjars :: webjars"></div>
   <div th:insert="parts/static :: static"></div>
 </head>
@@ -111,7 +111,7 @@
       <label class="col-sm-4 ">OG'IRLIGI</label>
       <div class="col">
         <input  th:value="0" th:field="*{weight}" type="text" class="form-control" id="weight" placeholder="OG'IRLIGI"
-                onkeypress="return isNumber(event)" onpaste="return false;"
+                onkeypress="return isNumberKey(this, event)" onpaste="return false;"
                 th:required="required"
                 oninvalid="this.setCustomValidity('OG\'IRLIGINI YOZISH KERAK!!')"
                 oninput="setCustomValidity('')"
@@ -167,6 +167,39 @@
     }
     return true;
   }
+
+  function isNumberKey(txt, evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode == 46) {
+      //Check if the text already contains the . character
+      if (txt.value.indexOf('.') === -1) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (charCode > 31 &&
+              (charCode < 48 || charCode > 57))
+        return false;
+    }
+    return true;
+  }
+
+  function isDoubleSpecial2(evt){
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode == 8 || charCode == 37) {
+      return true;
+    } else if (charCode == 46 && $(this).val().indexOf('.') != -1) {
+      return false;
+    } else if (charCode > 31 && charCode != 46 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+
+
+
   var checker = document.getElementById('checkme');
   var sendbtn = document.getElementById('karton');
   checker.onchange = function() {

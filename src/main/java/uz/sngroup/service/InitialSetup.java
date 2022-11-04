@@ -113,7 +113,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             barcode.setGramm(grammList.get(r.nextInt(grammList.size())).getId());
             barcode.setWidth(df.getNumberBetween(180,530));
             barcode.setHeight(df.getNumberBetween(1111,3500));
-            barcode.setWeight(df.getNumberBetween(120,150));
+//            barcode.setWeight(df.getNumberBetween(120,150));
             barcodeList.add(barcode);
         }
         for (Barcode b : barcodeList){

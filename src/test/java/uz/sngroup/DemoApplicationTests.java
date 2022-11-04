@@ -35,7 +35,7 @@
 //
 //        System.out.println(util.getFileFromRecFolder("logo.jpg","data").getPath());
 //        Path path = Paths.get(Application.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent().getParent();
-//        File initialFile = new File(path + "\\data\\" + "report1.jrxml");
+//        File initialFile = new File(path + "\\data\\" + "eski_tayyor_report1.jrxml");
 //        InputStream targetStream = new FileInputStream(initialFile);
 //        System.out.println(initialFile.getAbsolutePath());
 //    }

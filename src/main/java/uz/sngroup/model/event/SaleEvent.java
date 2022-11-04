@@ -39,7 +39,7 @@ public class SaleEvent {
 
     private Integer pieces = 0;
 
-    private Integer weight = 0;
+    private Double weight = 0.0;
 
     private String description = " ";
 
